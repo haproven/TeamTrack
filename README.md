@@ -14,15 +14,15 @@ TeamTrack is created to maintain a simple and organized record of team members.
 
 It provides a quick overview of:
 
-- Team members
-- Profile photo
-- Full name
-- Role
-- Department
-- Current project
-- Start date
-- Work status
-- HaproID profile
+* Team members
+* Profile photo
+* Full name
+* Role
+* Department
+* Current project
+* Start date
+* Work status
+* HaproID profile
 
 The dashboard is intended to provide quick information without storing unnecessary duplicate profile data.
 
@@ -32,18 +32,18 @@ The dashboard is intended to provide quick information without storing unnecessa
 
 The main dashboard will contain:
 
-- Search bar
-- Member statistics
-- Team member list
-- Current project information
-- Active / Inactive status
-- HaproID profile links
+* Search bar
+* Member statistics
+* Team member list
+* Current project information
+* Active / Inactive status
+* HaproID profile links
 
 ### Member List
 
-| # | Photo | Name | Role | Department | Current Project | Start Date | Status |
-|---|---|---|---|---|---|---|---|
-| 01 | Photo | Raima Mondal | Junior Frontend Developer | Web Development | — | 25/09/2026 | Active |
+| #  | Photo | Name | Role | Department | Current Project | Start Date | Status |
+| -- | ----- | ---- | ---- | ---------- | --------------- | ---------- | ------ |
+| 01 | Photo | Domy | —    | —          | —               | —          | Active |
 
 ---
 
@@ -55,15 +55,15 @@ When a member's name or HaproID is selected, the user can open their HaproID pro
 
 The HaproID profile can contain detailed information such as:
 
-- Personal information
-- Professional information
-- Skills
-- Experience
-- Projects
-- Certificates
-- Social profiles
-- Contact information
-- Other profile details
+* Personal information
+* Professional information
+* Skills
+* Experience
+* Projects
+* Certificates
+* Social profiles
+* Contact information
+* Other profile details
 
 This keeps TeamTrack focused only on team/work records.
 
@@ -75,13 +75,14 @@ The initial version will use JSON for storing team member records.
 
 ```json
 {
-  "id": "Pro-Raima-01",
-  "photo": "assets/team/raima.webp",
-  "name": "Raima Mondal",
-  "role": "Junior Frontend Developer",
-  "department": "Web Development",
+  "id": "Pro-Domy-01",
+  "photo": "assets/team/domy.webp",
+  "name": "Domy",
+  "role": "",
+  "department": "",
   "currentProject": "",
-  "startDate": "25/09/2026",
+  "startDate": "",
   "status": "Active",
-  "haproId": "https://haproid.netlify.app/Pro-Raima-01"
+  "haproId": "https://haproid.netlify.app/Pro-Domy-01"
 }
+```
