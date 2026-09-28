@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>403 - Forbidden</title>
+
+    <meta name="robots" content="noindex, follow">
+
+
+    <!-- ================= FAVICON ================= -->
+
+    <link rel="icon" href="https://example.com/assets/img/favicon.ico" type="image/x-icon">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #26263d);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden
+        }
+
+        .container {
+            padding: 40px
+        }
+
+        h1 {
+            font-size: 8rem;
+            color: #ff4d4d;
+            text-shadow: 0 0 20px rgba(255, 77, 77, .6);
+            margin-bottom: 10px
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #f5f5f5
+        }
+
+        p {
+            color: #bbb;
+            margin-bottom: 15px;
+            font-size: 1rem
+        }
+
+        #countdown {
+            color: #ffcc00;
+            font-weight: 700
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff4d4d;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform .2s, background .2s
+        }
+
+        .btn:hover {
+            background: #e63946;
+            transform: scale(1.05)
+        }
+
+        .btn.secondary {
+            background: #4d5bff
+        }
+
+        .btn.secondary:hover {
+            background: #3a46cc
+        }
+
+        .btn.hidden {
+            display: none !important
+        }
+
+        #warning {
+            margin-top: 20px;
+            color: #ffcc00;
+            font-size: .9rem;
+            display: none
+        }
+
+        #warning.show {
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>403</h1>
+
+        <h2>Access Forbidden</h2>
+
+        <p>
+            Aapko is page ko access karne ki permission nahi hai.
+        </p>
+
+        <!-- Auto Back Countdown -->
+        <p>
+            Wapas ja rahe hain <span id="countdown">5</span> seconds mein...
+        </p>
+
+        <div class="btn-row">
+            <button id="backBtn" class="btn secondary hidden" onclick="_0x4a2c()">
+                ⬅️ Wapas Jayein
+            </button>
+
+            <button id="homeBtn" class="btn hidden" onclick="_0x1f3d()">
+                🏠 Home Par Jayein
+            </button>
+        </div>
+
+        <div id="warning">
+            ⚠️ Developer Tools abhi bhi khule hain. Inhe band karein.
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+
+            const _0x1a2b = {
+                homeURL: "/",
+                checkInterval: 250,
+                sizeThreshold: 160,
+                timingThreshold: 100,
+                lockKey: "dt_lock",
+                returnKey: "dt_return",
+                confirmCycles: 2,
+
+                // Auto back time
+                autoBackTime: 5
+            };
+
+            const _0x3e4f = document.getElementById('homeBtn');
+            const _0x5a1b = document.getElementById('backBtn');
+            const _0x2c9e = document.getElementById('warning');
+            const _0x6b2a = document.getElementById('countdown');
+
+            let _0x4d12 = false;
+            let _0x8f2a = null;
+            let _0x9e1c = 0;
+
+            function _0x11ab() {
+                return (
+                    (window.outerWidth - window.innerWidth) >
+                    _0x1a2b.sizeThreshold ||
+                    (window.outerHeight - window.innerHeight) >
+                    _0x1a2b.sizeThreshold
+                );
+            }
+
+            function _0x22cd() {
+                const _0x3b = performance.now();
+                debugger;
+                return (performance.now() - _0x3b) >
+                    _0x1a2b.timingThreshold;
+            }
+
+            function _0x33ef() {
+                return _0x11ab() || _0x22cd();
+            }
+
+            function _0x44fa() {
+                const _0x12 = _0x33ef();
+
+                if (_0x12 === _0x8f2a) {
+                    _0x9e1c++;
+                } else {
+                    _0x8f2a = _0x12;
+                    _0x9e1c = 1;
+                }
+
+                return _0x9e1c >= _0x1a2b.confirmCycles
+                    ? _0x12
+                    : _0x4d12;
+            }
+
+            function _0x55bc(_0x0a) {
+                sessionStorage.removeItem(_0x1a2b.lockKey);
+                _0x0a();
+            }
+
+            // Home
+            window._0x1f3d = function () {
+                _0x55bc(() => {
+                    window.location.href = _0x1a2b.homeURL;
+                });
+            };
+
+            // Back
+            window._0x4a2c = function () {
+                _0x55bc(() => {
+
+                    const _0x7a =
+                        sessionStorage.getItem(
+                            _0x1a2b.returnKey
+                        );
+
+                    if (_0x7a) {
+                        window.location.href = _0x7a;
+                    }
+                    else if (document.referrer) {
+                        window.location.href = document.referrer;
+                    }
+                    else {
+                        window.location.href =
+                            _0x1a2b.homeURL;
+                    }
+
+                });
+            };
+
+            function _0x66de(_0x11) {
+
+                if (_0x11 === _0x4d12) return;
+
+                _0x4d12 = _0x11;
+
+                if (_0x11) {
+
+                    sessionStorage.setItem(
+                        _0x1a2b.lockKey,
+                        "1"
+                    );
+
+                    _0x3e4f.classList.add('hidden');
+                    _0x5a1b.classList.add('hidden');
+                    _0x2c9e.classList.add('show');
+
+                } else {
+
+                    sessionStorage.removeItem(
+                        _0x1a2b.lockKey
+                    );
+
+                    _0x3e4f.classList.remove('hidden');
+                    _0x5a1b.classList.remove('hidden');
+                    _0x2c9e.classList.remove('show');
+
+                }
+            }
+
+            function _0x77ef() {
+                _0x66de(_0x44fa());
+            }
+
+            setInterval(
+                _0x77ef,
+                _0x1a2b.checkInterval
+            );
+
+            window.addEventListener(
+                'resize',
+                _0x77ef
+            );
+
+            _0x77ef();
+
+            window.addEventListener(
+                'pageshow',
+                (_0x01) => {
+
+                    if (_0x01.persisted) {
+                        window.location.reload();
+                    }
+                    else {
+                        _0x77ef();
+                    }
+
+                }
+            );
+
+            // =========================================
+            // AUTO BACK
+            // =========================================
+
+            let _0xAutoBack =
+                _0x1a2b.autoBackTime;
+
+            const _0xAutoTimer =
+                setInterval(() => {
+
+                    _0xAutoBack--;
+
+                    if (_0xAutoBack >= 0) {
+                        _0x6b2a.textContent =
+                            _0xAutoBack;
+                    }
+
+                    if (_0xAutoBack <= 0) {
+
+                        clearInterval(_0xAutoTimer);
+
+                        // Previous page available
+                        if (document.referrer) {
+                            window.history.back();
+                        }
+
+                        // No previous page → Home
+                        else {
+                            window.location.href =
+                                _0x1a2b.homeURL;
+                        }
+                    }
+
+                }, 1000);
+
+            // =========================================
+            // HISTORY PROTECTION
+            // =========================================
+
+            history.pushState(
+                { trap: true },
+                '',
+                location.href
+            );
+
+            window.addEventListener(
+                'popstate',
+                () => {
+
+                    if (
+                        _0x4d12 ||
+                        sessionStorage.getItem(
+                            _0x1a2b.lockKey
+                        ) === "1"
+                    ) {
+
+                        history.pushState(
+                            { trap: true },
+                            '',
+                            location.href
+                        );
+
+                    }
+
+                }
+            );
+
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+```txt
+# =========================================================
+# WEBSITE ROBOTS.TXT - DUMMY / EXAMPLE TEMPLATE
+# =========================================================
+#
+# Replace:
+# example.com
+# /admin/
+# /private/
+# /login/
+# sitemap.xml
+#
+# with your actual website values.
+# =========================================================
+
+
+# =========================================================
+# 1. DEFAULT SEARCH ENGINE RULES
+# =========================================================
+
+# Example:
+# Allow all search engines to crawl the public website.
+
+User-agent: *
+Allow: /
+
+
+# =========================================================
+# 2. MAIN WEBSITE PAGES
+# =========================================================
+
+# Example public pages:
+#
+# https://example.com/
+# https://example.com/about.html
+# https://example.com/projects.html
+# https://example.com/contact.html
+
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /projects.html
+Allow: /contact.html
+
+
+# =========================================================
+# 3. PWA FILES
+# =========================================================
+
+# Example:
+#
+# https://example.com/manifest.json
+# https://example.com/service-worker.js
+
+Allow: /manifest.json
+Allow: /service-worker.js
+
+
+# =========================================================
+# 4. PUBLIC ASSETS
+# =========================================================
+
+# Example files:
+#
+# https://example.com/assets/logo.png
+# https://example.com/assets/img/profile.webp
+# https://example.com/css/style.css
+# https://example.com/js/app.js
+# https://example.com/img/banner.jpg
+
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+
+# =========================================================
+# 5. PRIVATE / ADMIN DIRECTORIES
+# =========================================================
+
+# Example:
+#
+# https://example.com/admin/
+# https://example.com/admin/dashboard.html
+#
+# Search engines should NOT crawl these URLs.
+
+Disallow: /admin/
+
+
+# =========================================================
+# 6. PRIVATE USER AREA
+# =========================================================
+
+# Example:
+#
+# https://example.com/private/
+# https://example.com/account/
+# https://example.com/dashboard/
+
+Disallow: /private/
+Disallow: /account/
+Disallow: /dashboard/
+
+
+# =========================================================
+# 7. LOGIN / AUTHENTICATION PAGES
+# =========================================================
+
+# Example:
+#
+# https://example.com/login.html
+# https://example.com/signup.html
+# https://example.com/register.html
+
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /register.html
+
+
+# =========================================================
+# 8. SYSTEM / INTERNAL FILES
+# =========================================================
+
+# Example:
+#
+# /config/
+# /backup/
+# /tmp/
+# /test/
+#
+# Do not allow search engines to crawl these directories.
+
+Disallow: /config/
+Disallow: /backup/
+Disallow: /tmp/
+Disallow: /test/
+
+
+# =========================================================
+# 9. LEGAL / NON-INDEXABLE PAGES
+# =========================================================
+
+# Example:
+#
+# https://example.com/privacy-policy.html
+# https://example.com/terms.html
+# https://example.com/cookie-policy.html
+
+Disallow: /privacy-policy.html
+Disallow: /terms.html
+Disallow: /cookie-policy.html
+
+
+# =========================================================
+# 10. URL PARAMETERS
+# =========================================================
+
+# Example:
+#
+# https://example.com/page?sort=new
+# https://example.com/page?filter=active
+# https://example.com/page?replytocom=123
+#
+# Prevent crawling of duplicate parameter URLs.
+
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?replytocom=
+
+
+# =========================================================
+# 11. SEARCH PAGES
+# =========================================================
+
+# Example:
+#
+# https://example.com/search?q=developer
+# https://example.com/search?query=project
+
+Disallow: /search
+Disallow: /search?
+
+
+# =========================================================
+# 12. BING CRAWLER
+# =========================================================
+
+# Example:
+# Bingbot ke requests ke beech 5 seconds ka crawl delay.
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 5
+
+
+# =========================================================
+# 13. YAHOO CRAWLER
+# =========================================================
+
+# Example:
+# Yahoo Slurp ke requests ke beech 10 seconds ka delay.
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 10
+
+
+# =========================================================
+# 14. GOOGLEBOT
+# =========================================================
+
+# Example:
+# Googlebot ko public website crawl karne ki permission.
+
+User-agent: Googlebot
+Allow: /
+
+
+# =========================================================
+# 15. IMAGE CRAWLER
+# =========================================================
+
+# Example:
+# Public images ko crawl karne ki permission.
+
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /img/
+
+
+# =========================================================
+# 16. SITEMAP
+# =========================================================
+
+# Example:
+#
+# https://example.com/sitemap.xml
+
+Sitemap: https://example.com/sitemap.xml
+
+
+# =========================================================
+# 17. HOST / CANONICAL DOMAIN
+# =========================================================
+
+# Example:
+#
+# Main website:
+# https://example.com/
+#
+# Note:
+# "Host" directive is not required by most modern search engines.
+# Keep it only if your target crawler specifically supports it.
+
+
+# =========================================================
+# END OF ROBOTS.TXT
+# =========================================================
+

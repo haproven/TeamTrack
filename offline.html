@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="robots" content="noindex,nofollow">
+  <title>You're Offline</title>
+
+  <style>
+    *{box-sizing:border-box;margin:0}
+
+    body{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:20px;
+      font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+      color:#e2e8f0;
+      background:#0f172a;
+      text-align:center;
+    }
+
+    main{
+      width:min(100%,380px);
+    }
+
+    .icon{
+      width:64px;
+      height:64px;
+      margin:0 auto 22px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#1e293b;
+    }
+
+    .icon svg{
+      width:32px;
+      height:32px;
+      fill:none;
+      stroke:#38bdf8;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    h1{
+      margin-bottom:8px;
+      font-size:1.5rem;
+      line-height:1.2;
+      color:#f8fafc;
+    }
+
+    p{
+      margin-bottom:24px;
+      color:#94a3b8;
+    }
+
+    button{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:11px 20px;
+      border:0;
+      border-radius:10px;
+      background:#38bdf8;
+      color:#0f172a;
+      font:600 14px system-ui,sans-serif;
+      cursor:pointer;
+    }
+
+    button:active{
+      transform:scale(.98);
+    }
+
+    button svg{
+      width:17px;
+      height:17px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:2.2;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .status{
+      margin-top:20px;
+      font-size:12px;
+      color:#64748b;
+    }
+
+    .dot{
+      display:inline-block;
+      width:7px;
+      height:7px;
+      margin-right:5px;
+      border-radius:50%;
+      background:#ef4444;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M1 1l22 22"/>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+        <path d="M12 20h.01"/>
+      </svg>
+    </div>
+
+    <h1>You're Offline</h1>
+
+    <p>
+      No internet connection detected.<br>
+      Check your network and try again.
+    </p>
+
+    <button type="button" onclick="location.reload()">
+      <svg viewBox="0 0 24 24">
+        <path d="M23 4v6h-6"/>
+        <path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/>
+      </svg>
+      Try Again
+    </button>
+
+    <div class="status">
+      <span class="dot"></span>
+      Offline mode
+    </div>
+
+  </main>
+
+  <script>
+    addEventListener("online",()=>location.reload());
+  </script>
+
+</body>
+</html>

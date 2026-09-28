@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ================= BASIC ================= -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>404 - Page Not Found | Haproven</title>
+
+    <meta name="robots"
+        content="noindex, follow">
+
+
+    <!-- ================= FAVICON ================= -->
+
+    <link rel="icon"
+        href="https://example.com/assets/img/favicon.ico"
+        type="image/x-icon">
+
+
+    <!-- ================= STYLE ================= -->
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+
+            font-family:
+                system-ui,
+                -apple-system,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            color: #f8fafc;
+            background: #0f172a;
+            text-align: center;
+        }
+
+        .error-page {
+            width: min(100%, 520px);
+        }
+
+
+
+        /* ================= ERROR ================= */
+
+        .error-code {
+            font-size: clamp(4.5rem, 18vw, 7rem);
+            line-height: .9;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+
+            color: #f8fafc;
+
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: clamp(1.35rem, 4vw, 1.7rem);
+            font-weight: 650;
+
+            margin-bottom: 10px;
+        }
+
+        .error-description {
+            max-width: 430px;
+
+            margin: 0 auto 18px;
+
+            color: #94a3b8;
+
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ================= COUNTDOWN ================= */
+
+        .redirect-message {
+            margin-bottom: 24px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .redirect-message strong {
+            color: #38bdf8;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 44px;
+
+            padding: 10px 18px;
+
+            border: 1px solid #38bdf8;
+            border-radius: 9px;
+
+            background: #38bdf8;
+            color: #0f172a;
+
+            font-size: 14px;
+            font-weight: 650;
+
+            text-decoration: none;
+
+            transition:
+                background .15s ease,
+                transform .15s ease;
+        }
+
+        .btn-home:hover {
+            background: #7dd3fc;
+            transform: translateY(-1px);
+        }
+
+        .btn-home:active {
+            transform: translateY(0);
+        }
+
+        .btn-home:focus-visible {
+            outline: 2px solid #f8fafc;
+            outline-offset: 3px;
+        }
+
+        .btn-home svg {
+            width: 17px;
+            height: 17px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .error-icon {
+                width: 64px;
+                height: 64px;
+                margin-bottom: 20px;
+            }
+
+            .error-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .error-description {
+                font-size: 14px;
+            }
+
+            .btn-home {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+    <main class="error-page">
+
+
+
+
+        <!-- ================= ERROR ================= -->
+
+        <h1 class="error-code">
+            404
+        </h1>
+
+        <h2 class="error-title">
+            Page Not Found
+        </h2>
+
+        <p class="error-description">
+            The page you are looking for may have been moved,
+            removed, or is temporarily unavailable.
+        </p>
+
+
+        <!-- ================= AUTO REDIRECT ================= -->
+
+        <p class="redirect-message">
+            Redirecting to home in
+            <strong id="countdown">10</strong>
+            seconds...
+        </p>
+
+
+        <!-- ================= HOME BUTTON ================= -->
+
+        <a href="/"
+            class="btn-home"
+            aria-label="Return to Haproven homepage">
+
+            <svg viewBox="0 0 24 24"
+                aria-hidden="true">
+
+                <path d="M3 11.5 12 4l9 7.5" />
+
+                <path d="M5 10.5V20h14v-9.5" />
+
+                <path d="M9 20v-5h6v5" />
+
+            </svg>
+
+            Go Back Home
+
+        </a>
+
+    </main>
+
+
+    <!-- ================= AUTO REDIRECT ================= -->
+
+    <script>
+
+        const redirectTime = 10;
+        const homeURL = "/";
+
+        let timeLeft = redirectTime;
+
+        const countdown =
+            document.getElementById("countdown");
+
+        const timer = setInterval(() => {
+
+            timeLeft--;
+
+            countdown.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timer);
+
+                window.location.replace(homeURL);
+
+            }
+
+        }, 1000);
+
+    </script>
+
+</body>
+
+</html>
