@@ -282,7 +282,7 @@ Example:
 
 ```text
 Done:
-Created the basic dashboard structure.
+Created the basic dashboarda structure.
 
 Working on:
 Member list rendering.
