@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en-in">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Page Title | Example Website</title>
+
+    <meta name="description" content="Short and clear description of this page.">
+    <link rel="canonical" href="https://example.com/page/example/">
+
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Page Title | Example Website">
+    <meta property="og:description" content="Short description of this page.">
+
+    <meta property="og:url" content="https://example.com/page/example/">
+
+    <meta property="og:image" content="https://example.com/assets/img/og-image.png">
+
+    <meta property="og:site_name" content="Example Website">
+
+
+    <!-- ================= TWITTER / X ================= -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Page Title | Example Website">
+
+    <meta name="twitter:description" content="Short description of this page.">
+
+    <meta name="twitter:image" content="https://example.com/assets/img/og-image.png">
+
+
+    <!-- ================= FAVICON ================= -->
+
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+
+    <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+
+
+    <!-- ================= PWA ================= -->
+
+    <link rel="manifest" href="/manifest.json">
+
+
+    <!-- ================= ICONS ================= -->
+
+    <!-- 🟢 Keep only if Font Awesome is used on this page -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+
+
+    <!-- ================= GLOBAL CSS ================= -->
+    <script>
+        (() => {
+            const d = [
+                "aHR0cHM6Ly9oYXByb2Jhc2UubmV0bGlmeS5hcHAvaW50ZXJuYWwvY3NzL2Jhc2UuY3Nz",
+                "aHR0cHM6Ly9oYXByb2Jhc2Uub25yZW5kZXIuY29tL2V4dGVybmFsL2Nzcy9iYXNlLmNzcw=="
+            ]; d.forEach(x => { const e = document.createElement("link"); e.rel = "stylesheet"; e.href = atob(x); document.head.appendChild(e) })
+        })();
+    </script>
+
+
+
+    <link rel="stylesheet" href="data:text/css;base64,CkBpbXBvcnQgdXJsKCcvZXh0ZXJuYWwvY3NzL21haW4vYXNpZGUuY3NzJyk7CgoKCgoKCg==">
+
+
+
+    <!-- ================= STRUCTURED DATA ================= -->
+    <!-- 🔴 Change page-specific information -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+
+        "name": "Page Title",
+
+        "url": "https://example.com/page/example/",
+
+        "description": "Short description of this page.",
+
+        "inLanguage": "en-IN",
+
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Example Website",
+            "url": "https://example.com/"
+        }
+    }
+    </script>
+
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+    <!-- ======================================================================================================================================================================================= -->
+    <header id="header">
+
+        <div class="header">
+            <div class="logo">
+                <a href="/">
+                    <div class="haproven-brand animate" data-name="site name by haproven ">haproven</div>
+                </a>
+            </div>
+
+            <div class="header-senter">
+                <ul id="header-links">
+                    <li class="nav-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</li>
+                    <li class="nav-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</li>
+                    <li class="nav-loading"><i class="fas fa-spinner fa-spin"></i> Loading...</li>
+                </ul>
+            </div>
+
+
+            <div class="header-right-side">
+
+                <div class="header-manu">
+                    <div class="menu-wrapper">
+
+                        <button class="dot-menu-btn" id="dot6menu" aria-label="Toggle Apps Menu">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </button>
+
+                        <div class="team-dropdown" id="teamDropdown">
+
+                            <div class="quick-actions" id="dot6">
+                                <a href="javascript:void(0)" class="action-box" onclick="toggleLanguage()">
+                                    <div class="language-switch">
+                                        <button id="langBtn">हिंदी</button>
+                                    </div>
+                                    <span>Lang..</span>
+                                </a>
+                                <a id="theme-toggle" class="action-box" href="javascript:void(0)">
+                                    <span class="icon sun">☀️</span>
+                                    <span class="icon moon">🌙</span>
+                                    <span>Theme</span>
+                                </a>
+                                <a href="#" id="login-action" class="action-box">
+                                    <i class="ri-login-circle-line"></i>
+                                    <span>Login</span>
+                                </a>
+
+                                <a href="#" id="main-audio-button" class="action-box">
+                                    <i class="fa-solid fa-volume-low"></i>
+                                    <span>Audio</span>
+                                </a>
+
+                            </div>
+
+                            <ul class="by-haproven" id="by-haproven">
+                                <!-- haproven eco. link -->
+                                <li>
+                                    <a href="" class="member-box">
+                                        <i class="fas fa-circle-notch fa-spin fa-4px"></i>
+                                        <span>Loading...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="member-box">
+                                        <i class="fas fa-circle-notch fa-spin fa-4px"></i>
+                                        <span>Loading...</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" class="member-box">
+                                        <i class="fas fa-circle-notch fa-spin fa-4px"></i>
+                                        <span>Loading...</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav id="navbar-mobile">
+                    <div class="menu-title">Main Menu</div>
+
+                    <ul class="navbar-mobile" id="mobile-sidebar">
+                        <li class="sidebar-icon-loading">
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Loading Menu...</span>
+                        </li>
+                    </ul>
+
+                    <hr class="hr">
+
+                    <div class="mobile-social haproven-sosal-links">
+                        <a aria-label="loading"><i class="fas fa-circle-notch fa-spin" style="color: #007bff;"></i></a>
+                        <a aria-label="loading"><i class="fas fa-circle-notch fa-spin" style="color: #007bff;"></i></a>
+                        <a aria-label="loading"><i class="fas fa-circle-notch fa-spin" style="color: #007bff;"></i></a>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+    </header>
+
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="sidebar-live-box">
+                <p id="live-text">
+                    <i class="fas fa-circle-notch fa-spin icon-loader"></i> <span>Loading status...</span>
+                </p>
+            </div>
+            <!-- <br> -->
+
+            <p id="liv-open-page">
+                <span class="page-loading"><i class="fas fa-spinner fa-spin"></i> Detecting Page...</span>
+            </p>
+        </div>
+
+
+
+
+        <nav class="sidebar-nav" id="sidebar_lapto">
+            <ul class="nav-list" id="laptop-sidebar">
+
+                <li class="nav-item has-submenu">
+                    <a href=""> Page link.</a>
+                    <ul class="submenu">
+                        <li><i class="fas fa-spinner fa-spin"></i> Loading... </li>
+                        <li><i class="fas fa-spinner fa-spin"></i> Loading... </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <hr>
+            <ul class="social-links haproven-sosal-links">
+                <li><i class="fas fa-spinner fa-spin social-loader"></i></li>
+                <li><i class="fas fa-spinner fa-spin social-loader"></i></li>
+                <li><i class="fas fa-spinner fa-spin social-loader"></i></li>
+                <li><i class="fas fa-spinner fa-spin social-loader"></i></li>
+                <li><i class="fas fa-spinner fa-spin social-loader"></i></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- ======================================================================================================================================================================================= -->
+
+
+
+    <style>
+        #hero {
+            background-color: rgb(74, 76, 78);
+            height: 100vh;
+            color: rgb(232, 226, 226);
+        }
+
+        #about {
+            background-color: rgb(86, 67, 87);
+
+            color: rgb(232, 226, 226);
+        }
+
+        .section {
+            height: 100vh;
+        }
+    </style>
+
+
+    <main class="main">
+
+
+        <article id="hero">
+            <h1>hero section</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio minima suscipit odio sint ut quod
+                molestiae repudiandae corrupti eum, eos ad rem, quia deleniti maxime, atque exercitationem? Iure,
+                beatae! Perferendis aliquam dicta optio, recusandae cumque, inventore ad illo magni ipsum impedit
+                exercitationem labore quisquam! Deserunt debitis laborum earum. Iure libero quod incidunt officia culpa
+                necessitatibus sequi sed. Blanditiis doloribus iure odit, consectetur saepe earum, tenetur reiciendis
+                voluptates quaerat natus officia ex aspernatur, quasi rem. Delectus quod debitis id maiores quis ex
+                pariatur, dolores sunt voluptatum laborum officiis itaque rerum eligendi impedit suscipit est ducimus
+                voluptate consequatur omnis quae ab architecto! Repellat iste minus, dolores harum porro temporibus.
+                Quidem doloribus porro velit nobis, enim voluptatem delectus sed consectetur deserunt animi saepe
+                corrupti laboriosam eveniet maxime. Error doloremque consequatur adipisci culpa debitis eaque illum
+                impedit assumenda perspiciatis, voluptatem, itaque esse quis. Reprehenderit necessitatibus minus, quod
+                at impedit architecto dolore corrupti aut cum amet corporis praesentium odit accusantium, culpa veniam,
+                repudiandae dolores officia quia. Vitae odio unde ipsum nesciunt dolores. Dolores repellat alias
+                molestiae perspiciatis voluptate repellendus, praesentium voluptas sint iste sit officia? Dolor facilis
+                expedita cupiditate quis molestias voluptates ipsam? Vitae nam minus quam repellendus labore ad vel
+                numquam esse necessitatibus? Cum, blanditiis reprehenderit. Consequuntur, obcaecati architecto odio fuga
+                culpa officiis et illum hic incidunt molestias rerum minus ratione. Porro cupiditate explicabo aliquid
+                dolore, vero aspernatur vitae. Corporis eveniet nisi rerum dolor similique odit consequuntur atque non
+                doloribus voluptatibus, iste quisquam et vero provident ipsa eos optio vel quaerat nihil sequi
+                repudiandae error incidunt! Cum nesciunt, fugiat repudiandae deleniti ut repellendus! Autem placeat
+                dolorem nostrum voluptas et tempora sint voluptatibus doloribus recusandae mollitia tempore id iste
+                culpa quisquam nisi voluptate, modi perferendis eaque! Nisi inventore blanditiis eos esse provident
+                sapiente assumenda nemo, eius placeat dolorem odio error rerum natus, dicta animi est illo, quos dolor
+                sunt eaque voluptate aliquid. Assumenda cumque minus omnis ab eos fugit quos nobis corrupti porro,
+                repellat ex, nulla laboriosam? Accusamus praesentium illo recusandae, illum totam saepe quidem sed,
+                aspernatur veritatis voluptatibus vel facere delectus vero beatae doloribus. Voluptates officiis quaerat
+                ipsa provident aperiam molestias assumenda veritatis quae maiores vero suscipit ullam vel, quisquam qui
+                velit ipsum commodi, alias labore natus adipisci fuga. Sapiente, esse recusandae. Illum, quidem. Iure
+                aliquid dolor provident tempore, exercitationem illum! Recusandae rem veritatis tenetur pariatur.
+                Repellat perferendis excepturi rerum. Recusandae voluptas alias qui assumenda rem! Ut necessitatibus
+                molestias neque ipsam repudiandae adipisci nostrum nihil vero incidunt quasi quo consequatur impedit
+                doloribus eius sapiente reiciendis et labore atque eaque, sequi at aperiam dolorem, illo error? Omnis
+                magni dolor quia? Porro animi dolorum quasi. Quos omnis, porro ad debitis provident deserunt molestiae
+                quibusdam, culpa quod tenetur illo eligendi voluptatibus temporibus laboriosam laudantium illum eveniet
+                quidem natus consequuntur accusamus ipsa modi magni beatae reiciendis? Cumque inventore molestiae eius
+                est autem explicabo quidem saepe qui incidunt sapiente doloremque recusandae sunt consequuntur maiores
+                libero ad reprehenderit placeat aliquid praesentium id ratione consequatur, quaerat et. Magni enim
+                placeat veritatis quo aliquid perspiciatis earum dolore eos incidunt, dolores minus consequuntur!</p>
+
+
+        </article>
+
+
+        <section class="section" id="about">
+
+            <h2>about section</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus culpa quae impedit fugit sunt atque
+                nulla minus provident saepe est aliquid placeat, quis laudantium ducimus officiis inventore nesciunt
+                corrupti modi fugiat qui dignissimos error dolorum nihil voluptatibus! Praesentium mollitia placeat
+                officia vitae corporis delectus perferendis perspiciatis eius quam suscipit totam aut numquam sed quasi
+                reprehenderit debitis tempore distinctio doloribus nam, repudiandae tenetur error nostrum! Id illo
+                asperiores officia repellat ex qui quas doloribus facilis, amet eum praesentium aliquam vero ipsam est
+                quaerat itaque ab voluptatum, sapiente iusto quisquam eos repellendus molestias, exercitationem nihil.
+                Sunt velit laborum id nisi delectus in libero, quisquam enim voluptatem facilis unde. Autem iusto saepe
+                quaerat repellendus ratione nobis, officia dignissimos cumque exercitationem cum id repellat eum
+                molestiae dolorum impedit. Officia magnam at, veniam exercitationem dicta voluptatum suscipit voluptatem
+                veritatis magni! Nobis eos natus pariatur sapiente perspiciatis ullam quam odit, culpa maiores modi
+                maxime saepe exercitationem explicabo unde magni amet quis eveniet, cum voluptas, consequatur possimus
+                illum commodi. Expedita ad aut sunt provident, qui quas dolor culpa eveniet assumenda hic. Impedit
+                perferendis et voluptate eos quae temporibus tempore molestias, ea quia quis, cupiditate pariatur iste
+                nobis dolores itaque. Nesciunt voluptatum porro in natus repellat accusantium itaque.</p>
+
+        </section>
+
+
+        <div class="section">
+
+        </div>
+
+
+
+        <!-- --------------------------------------------------------------------------------------------------------- -->
+
+    </main>
+
+    <footer>
+        <div class="footer">
+            &copy;<span id="year"></span> Haproven • Built with ❤️ in India
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+<script>
+    document.write(atob("PHNjcmlwdCBzcmM9Ii9hc3NldHMvanMvZGlyZWN0b3J5LmpzIj48L3NjcmlwdD4="));
+    document.write(atob("PHNjcmlwdCBzcmM9Imh0dHBzOi8vY29kZXJzdXNoZWVsLmdpdGh1Yi5pby9oYXByb2Jhc2UvZXh0ZXJuYWwvanMvYXBpL2dsb2JhbC5qcyI+PC9zY3JpcHQ+"));
+    document.write(atob("PHNjcmlwdCBzcmM9Imh0dHBzOi8vY29kZXJzdXNoZWVsLmdpdGh1Yi5pby9oYXByb2Jhc2UvZXh0ZXJuYWwvanMvYXV0aC9hdXRoLmpzIj48L3NjcmlwdD4="));
+    document.write(atob("PHNjcmlwdCBzcmM9Imh0dHBzOi8vY29kZXJzdXNoZWVsLmdpdGh1Yi5pby9oYXByb2Jhc2UvZXh0ZXJuYWwvanMvbWFpbi9zY3JpcHQuanMiPjwvc2NyaXB0Pg=="));
+    document.write(atob("PHNjcmlwdCBzcmM9Imh0dHBzOi8vY29kZXJzdXNoZWVsLmdpdGh1Yi5pby9oYXByb2Jhc2UvZXh0ZXJuYWwvanMvbWFpbi9wYWdlLWxvYWRlci5qcyI+PC9zY3JpcHQ+"));
+    // document.write(atob("PHNjcmlwdCBzcmM9Imh0dHBzOi8vY29kZXJzdXNoZWVsLmdpdGh1Yi5pby9oYXByb2Jhc2UvZXh0ZXJuYWwvanMvc2VjdXJpdHkvYW50aS1pbnNwZWN0LmpzIj48L3NjcmlwdD4="));
+</script>
+
+
+
+
+</body>
+
+</html>
