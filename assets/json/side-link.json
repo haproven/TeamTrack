@@ -1,0 +1,148 @@
+{
+    "navigation_system": [
+        {
+            "category": "Main Menu",
+            "items": [
+                {
+                    "name": "Home",
+                    "icon": "fa-house",
+                    "url": "#",
+                    "type": "link",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ]
+                },
+                
+                {
+                    "name": "Tools",
+                    "icon": "fa-wrench",
+                    "url": "#",
+                    "type": "dropdown",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ]
+                },
+                {
+                    "name": "Projects",
+                    "icon": "fa-folder",
+                    "url": "#",
+                    "type": "link",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Pages & Quick Links",
+            "items": [
+                {
+                    "name": "About",
+                    "icon": "fa-circle-info",
+                    "url": "#",
+                    "type": "link",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ]
+                },
+                {
+                    "name": "Pages",
+                    "icon": "fa-file",
+                    "url": "#",
+                    "type": "dropdown",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ],
+                    "dropdown_items": [
+                        {
+                            "name": "Page One",
+                            "icon": "fa-file-lines",
+                            "url": "#",
+                            "placements": [
+                                "header",
+                                "sidebar_laptop",
+                                "sidebar_mobile"
+                            ]
+                        },
+                        {
+                            "name": "Page Two",
+                            "icon": "fa-file-lines",
+                            "url": "#",
+                            "placements": [
+                                "header",
+                                "sidebar_laptop",
+                                "sidebar_mobile"
+                            ]
+                        },
+                        {
+                            "name": "Page Three",
+                            "icon": "fa-file-lines",
+                            "url": "#",
+                            "placements": [
+                                "sidebar_laptop",
+                                "sidebar_mobile"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "category": "Resources",
+            "items": [
+                {
+                    "name": "Documentation",
+                    "icon": "fa-book",
+                    "url": "#",
+                    "type": "link",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ]
+                },
+                {
+                    "name": "Resources",
+                    "icon": "fa-box",
+                    "url": "#",
+                    "type": "dropdown",
+                    "placements": [
+                        "header",
+                        "sidebar_laptop",
+                        "sidebar_mobile"
+                    ],
+                    "dropdown_items": [
+                        {
+                            "name": "Resource One",
+                            "icon": "fa-file",
+                            "url": "#",
+                            "placements": [
+                                "sidebar_laptop",
+                                "sidebar_mobile"
+                            ]
+                        },
+                        {
+                            "name": "Resource Two",
+                            "icon": "fa-file",
+                            "url": "#",
+                            "placements": [
+                                "sidebar_laptop",
+                                "sidebar_mobile"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
