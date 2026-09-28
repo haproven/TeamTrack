@@ -65,9 +65,9 @@
                     ],
                     "dropdown_items": [
                         {
-                            "name": "Page One",
+                            "name": "team",
                             "icon": "fa-file-lines",
-                            "url": "#",
+                            "url": "/pages/team/index.html",
                             "placements": [
                                 "header",
                                 "sidebar_laptop",
