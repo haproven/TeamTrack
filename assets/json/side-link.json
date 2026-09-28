@@ -56,7 +56,7 @@
                 {
                     "name": "Pages",
                     "icon": "fa-file",
-                    "url": "#",
+                    "url": "/pages/",
                     "type": "dropdown",
                     "placements": [
                         "header",
