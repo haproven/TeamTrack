@@ -17,20 +17,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Projects Page -->
-  <url>
-    <loc>https://example.com/projects</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
 
-  <!-- Contact Page -->
-  <url>
-    <loc>https://example.com/contact</loc>
-    <lastmod>2026-09-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
 
 </urlset>
