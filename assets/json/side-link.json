@@ -6,7 +6,7 @@
                 {
                     "name": "Home",
                     "icon": "fa-house",
-                    "url": "#",
+                    "url": "/",
                     "type": "link",
                     "placements": [
                         "header",
@@ -14,7 +14,6 @@
                         "sidebar_mobile"
                     ]
                 },
-                
                 {
                     "name": "Tools",
                     "icon": "fa-wrench",
@@ -75,9 +74,9 @@
                             ]
                         },
                         {
-                            "name": "Page Two",
-                            "icon": "fa-file-lines",
-                            "url": "#",
+                            "name": "Dashboard",
+                            "icon": "fa-gauge-high",
+                            "url": "/pages/Dashboard/",
                             "placements": [
                                 "header",
                                 "sidebar_laptop",
