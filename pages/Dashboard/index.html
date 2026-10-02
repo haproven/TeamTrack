@@ -254,32 +254,1837 @@
 
     <main class="main">
 
-
         <style>
-            #hero {
-                padding: 10px;
-
+            /* =========================================================
+               TEAMTRACK DASHBOARD & FULL-HEIGHT SIDEBAR STYLES (SCOPED)
+               ========================================================= */
+            .teamtrack-layout {
+                padding-top: 55px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                color: #1e293b;
             }
 
-            #about {
-                background-color: rgb(86, 67, 87);
-                color: rgb(232, 226, 226);
+            /* --- Full-Height Fixed Sidebar --- */
+            .teamtrack-sidebar {
+                position: fixed;
+                top: 55px;
+                left: 0;
+                width: 180px;
+                height: calc(100vh - 55px);
+                background: #ffffff;
+                border-right: 1px solid #e2e8f0;
+                padding: 18px 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                box-sizing: border-box;
+                z-index: 900;
+                overflow-y: auto;
             }
 
-            .section {
-                height: 100vh;
+            .teamtrack-sidebar-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 4px 8px 14px 8px;
+                border-bottom: 1px solid #f1f5f9;
             }
+
+            .teamtrack-sidebar-logo-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #2563eb, #4f46e5);
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                flex-shrink: 0;
+            }
+
+            .teamtrack-brand-title {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #0f172a;
+                line-height: 1.2;
+            }
+
+            .teamtrack-sidebar-nav {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                flex: 1;
+            }
+
+            .teamtrack-nav-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                font-weight: 500;
+                color: #475569;
+                text-decoration: none;
+                transition: all 0.15s ease;
+                cursor: pointer;
+                background: none;
+                border: none;
+                width: 100%;
+                text-align: left;
+                box-sizing: border-box;
+            }
+
+            .teamtrack-nav-item i {
+                font-size: 1.1rem;
+                width: 20px;
+                text-align: center;
+                color: #64748b;
+                transition: color 0.15s ease;
+            }
+
+            .teamtrack-nav-item:hover:not(.teamtrack-nav-disabled) {
+                background-color: #f1f5f9;
+                color: #0f172a;
+            }
+
+            .teamtrack-nav-item:hover:not(.teamtrack-nav-disabled) i {
+                color: #2563eb;
+            }
+
+            .teamtrack-nav-item.active {
+                background-color: #eff6ff;
+                color: #2563eb;
+                font-weight: 600;
+            }
+
+            .teamtrack-nav-item.active i {
+                color: #2563eb;
+            }
+
+            .teamtrack-nav-disabled {
+                opacity: 0.45;
+                cursor: not-allowed;
+            }
+
+            .teamtrack-sidebar-footer {
+                margin-top: auto;
+                padding-top: 12px;
+                border-top: 1px solid #f1f5f9;
+                font-size: 0.75rem;
+                color: #94a3b8;
+                text-align: center;
+            }
+
+            /* --- Main Content Area --- */
+            .teamtrack-main {
+                margin-left: 180px;
+                padding: 24px 20px 48px 20px;
+                min-width: 0;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            /* Intro & Headings */
+            .teamtrack-intro {
+                margin-bottom: 20px;
+            }
+
+            .teamtrack-intro h1,
+            .teamtrack-intro h2 {
+                font-size: 1.85rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin: 0 0 6px 0;
+                letter-spacing: -0.025em;
+            }
+
+            .teamtrack-subtitle {
+                font-size: 0.95rem;
+                color: #64748b;
+                margin: 0;
+            }
+
+            /* Stats Grid */
+            .teamtrack-stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .teamtrack-stat-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 16px 18px;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+                transition: transform 0.15s ease, box-shadow 0.15s ease;
+            }
+
+            .teamtrack-stat-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            }
+
+            .teamtrack-stat-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.25rem;
+                flex-shrink: 0;
+            }
+
+            .teamtrack-icon-total {
+                background-color: #eff6ff;
+                color: #2563eb;
+            }
+
+            .teamtrack-icon-active {
+                background-color: #ecfdf5;
+                color: #059669;
+            }
+
+            .teamtrack-icon-inactive {
+                background-color: #fef2f2;
+                color: #dc2626;
+            }
+
+            .teamtrack-icon-projects {
+                background-color: #f5f3ff;
+                color: #7c3aed;
+            }
+
+            .teamtrack-stat-content {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .teamtrack-stat-value {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #0f172a;
+                line-height: 1.2;
+            }
+
+            .teamtrack-stat-label {
+                font-size: 0.8rem;
+                font-weight: 500;
+                color: #64748b;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                margin-top: 2px;
+            }
+
+            /* Controls (Search & Filters) */
+            .teamtrack-controls {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 16px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                align-items: center;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            }
+
+            .teamtrack-search-box {
+                position: relative;
+                flex: 1 1 240px;
+            }
+
+            .teamtrack-search-icon {
+                position: absolute;
+                left: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #94a3b8;
+                font-size: 0.95rem;
+                pointer-events: none;
+            }
+
+            .teamtrack-input {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px 12px 10px 36px;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                color: #1e293b;
+                background-color: #f8fafc;
+                transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+                outline: none;
+            }
+
+            .teamtrack-input:focus {
+                border-color: #3b82f6;
+                background-color: #ffffff;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            }
+
+            .teamtrack-filters-group {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .teamtrack-select {
+                padding: 10px 32px 10px 12px;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                color: #1e293b;
+                background-color: #f8fafc;
+                cursor: pointer;
+                outline: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+                background-size: 14px;
+                transition: border-color 0.15s, background-color 0.15s;
+            }
+
+            .teamtrack-select:focus {
+                border-color: #3b82f6;
+                background-color: #ffffff;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            }
+
+            .teamtrack-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                padding: 10px 14px;
+                border-radius: 8px;
+                font-size: 0.875rem;
+                font-weight: 500;
+                cursor: pointer;
+                border: none;
+                transition: background-color 0.15s, transform 0.1s;
+            }
+
+            .teamtrack-btn-secondary {
+                background-color: #f1f5f9;
+                color: #475569;
+                border: 1px solid #cbd5e1;
+            }
+
+            .teamtrack-btn-secondary:hover {
+                background-color: #e2e8f0;
+                color: #1e293b;
+            }
+
+            .teamtrack-btn-primary {
+                background-color: #2563eb;
+                color: #ffffff;
+            }
+
+            .teamtrack-btn-primary:hover {
+                background-color: #1d4ed8;
+            }
+
+            /* Table Card & Content */
+            .teamtrack-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+                overflow: hidden;
+            }
+
+            .teamtrack-card-header {
+                padding: 14px 20px;
+                border-bottom: 1px solid #e2e8f0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #f8fafc;
+            }
+
+            .teamtrack-card-title {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+            .teamtrack-count-badge {
+                font-size: 0.85rem;
+                color: #64748b;
+                font-weight: 500;
+            }
+
+            .teamtrack-table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .teamtrack-table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: left;
+                font-size: 0.9rem;
+            }
+
+            .teamtrack-table thead {
+                background-color: #f8fafc;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .teamtrack-table th {
+                padding: 10px 12px;
+                font-weight: 600;
+                font-size: 0.775rem;
+                color: #475569;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                white-space: nowrap;
+            }
+
+            .teamtrack-sort-header {
+                cursor: pointer;
+                user-select: none;
+                transition: color 0.15s;
+            }
+
+            .teamtrack-sort-header:hover {
+                color: #0f172a;
+            }
+
+            .teamtrack-sort-header i {
+                margin-left: 4px;
+                font-size: 0.75rem;
+                opacity: 0.45;
+            }
+
+            .teamtrack-sort-header.sorted-asc i,
+            .teamtrack-sort-header.sorted-desc i {
+                opacity: 1;
+                color: #2563eb;
+            }
+
+            .teamtrack-table tbody tr {
+                border-bottom: 1px solid #f1f5f9;
+                transition: background-color 0.15s ease;
+            }
+
+            .teamtrack-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+            .teamtrack-table tbody tr:hover {
+                background-color: #f8fafc;
+            }
+
+            .teamtrack-table td {
+                padding: 10px 12px;
+                vertical-align: middle;
+                color: #334155;
+            }
+
+            .teamtrack-cell-num {
+                font-weight: 600;
+                color: #94a3b8;
+                width: 42px;
+                padding-left: 12px;
+            }
+
+            .teamtrack-member-cell {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                min-width: 140px;
+            }
+
+            .teamtrack-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+                background-color: #e2e8f0;
+            }
+
+            .teamtrack-avatar-fallback {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #3b82f6, #6366f1);
+                color: #ffffff;
+                font-size: 0.8rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                letter-spacing: 0.02em;
+            }
+
+            .teamtrack-member-name {
+                font-weight: 600;
+                color: #0f172a;
+            }
+
+            .teamtrack-project-badge {
+                display: inline-block;
+                padding: 4px 10px;
+                background-color: #f1f5f9;
+                color: #334155;
+                border-radius: 6px;
+                font-size: 0.825rem;
+                font-weight: 500;
+                white-space: nowrap;
+            }
+
+            .teamtrack-status-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+
+            .teamtrack-status-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+            }
+
+            .teamtrack-status-pill.status-active {
+                background-color: #ecfdf5;
+                color: #047857;
+            }
+
+            .teamtrack-status-pill.status-active .teamtrack-status-dot {
+                background-color: #10b981;
+                box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            }
+
+            .teamtrack-status-pill.status-inactive {
+                background-color: #fef2f2;
+                color: #b91c1c;
+            }
+
+            .teamtrack-status-pill.status-inactive .teamtrack-status-dot {
+                background-color: #ef4444;
+                box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+            }
+
+            .teamtrack-haproid-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                color: #2563eb;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.85rem;
+                padding: 4px 8px;
+                border-radius: 6px;
+                transition: background-color 0.15s, color 0.15s;
+            }
+
+            .teamtrack-haproid-link:hover {
+                background-color: #eff6ff;
+                color: #1d4ed8;
+                text-decoration: underline;
+            }
+
+            .teamtrack-unlinked {
+                color: #94a3b8;
+                font-size: 0.9rem;
+            }
+
+            /* --- Projects View Elements --- */
+            .teamtrack-projects-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .teamtrack-project-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                transition: transform 0.15s ease, box-shadow 0.15s ease;
+            }
+
+            .teamtrack-project-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            }
+
+            .teamtrack-project-card-top {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .teamtrack-project-name {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin: 0;
+            }
+
+            .teamtrack-project-id {
+                display: inline-block;
+                padding: 3px 8px;
+                background-color: #f1f5f9;
+                color: #64748b;
+                border-radius: 6px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                font-family: monospace;
+            }
+
+            .teamtrack-project-meta {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                padding-top: 6px;
+                border-top: 1px solid #f1f5f9;
+            }
+
+            .teamtrack-project-meta-label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: #64748b;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+            }
+
+            .teamtrack-project-members-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .teamtrack-member-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background-color: #eff6ff;
+                color: #1e40af;
+                padding: 4px 10px;
+                border-radius: 16px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+
+            /* --- Overview View Elements --- */
+            .teamtrack-overview-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 20px;
+            }
+
+            .teamtrack-summary-item {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                padding: 12px 18px;
+                border-bottom: 1px solid #f1f5f9;
+            }
+
+            .teamtrack-summary-item:last-child {
+                border-bottom: none;
+            }
+
+            .teamtrack-summary-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 0.9rem;
+            }
+
+            .teamtrack-summary-name {
+                font-weight: 600;
+                color: #1e293b;
+            }
+
+            .teamtrack-summary-val {
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+            .teamtrack-bar-track {
+                width: 100%;
+                height: 6px;
+                background-color: #f1f5f9;
+                border-radius: 3px;
+                overflow: hidden;
+            }
+
+            .teamtrack-bar-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #3b82f6, #6366f1);
+                border-radius: 3px;
+                transition: width 0.3s ease;
+            }
+
+            /* State Indicators */
+            .teamtrack-state-box {
+                padding: 48px 24px;
+                text-align: center;
+                color: #64748b;
+            }
+
+            .teamtrack-state-icon {
+                font-size: 2rem;
+                color: #94a3b8;
+                margin-bottom: 12px;
+            }
+
+            .teamtrack-error-box {
+                background-color: #fef2f2;
+                border: 1px solid #fee2e2;
+                border-radius: 12px;
+                padding: 32px 24px;
+                text-align: center;
+                margin-bottom: 24px;
+            }
+
+            .teamtrack-error-box h3 {
+                color: #991b1b;
+                margin: 0 0 8px 0;
+                font-size: 1.15rem;
+            }
+
+            .teamtrack-error-box p {
+                color: #7f1d1d;
+                margin: 0 0 16px 0;
+                font-size: 0.9rem;
+            }
+
+            /* Responsive */
+            @media (max-width: 900px) {
+                .teamtrack-layout {
+                    padding-top: 55px;
+                    min-height: auto;
+                }
+
+                .teamtrack-sidebar {
+                    position: static;
+                    width: 100%;
+                    height: auto;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    padding: 12px;
+                    gap: 10px;
+                    overflow-y: visible;
+                    z-index: auto;
+                }
+
+                .teamtrack-main {
+                    margin-left: 0;
+                    padding: 16px 12px 36px 12px;
+                    width: 100%;
+                }
+
+                .teamtrack-sidebar-brand {
+                    padding-bottom: 8px;
+                }
+
+                .teamtrack-sidebar-nav {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                }
+
+                .teamtrack-nav-item {
+                    flex: 1 1 auto;
+                    justify-content: center;
+                    padding: 8px 10px;
+                    font-size: 0.84rem;
+                }
+
+                .teamtrack-sidebar-footer {
+                    display: none;
+                }
+
+                .teamtrack-intro h1,
+                .teamtrack-intro h2 {
+                    font-size: 1.5rem;
+                }
+
+                .teamtrack-stats {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+
+                .teamtrack-controls {
+                    flex-direction: column;
+                    align-items: stretch;
+                    padding: 12px;
+                    gap: 10px;
+                }
+
+                .teamtrack-filters-group {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .teamtrack-select,
+                .teamtrack-btn {
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .teamtrack-stats {
+                    grid-template-columns: 1fr;
+                }
+            }
+        
+            /* Dark theme support for TeamTrack content */
+            body.dark .teamtrack-sidebar,
+            html.dark .teamtrack-sidebar,
+            body.dark .teamtrack-card,
+            html.dark .teamtrack-card,
+            body.dark .teamtrack-controls,
+            html.dark .teamtrack-controls,
+            body.dark .teamtrack-stat-card,
+            html.dark .teamtrack-stat-card,
+            body.dark .teamtrack-project-card,
+            html.dark .teamtrack-project-card {
+                background: #1e293b;
+                border-color: #334155;
+                color: #f8fafc;
+            }
+
+            body.dark .teamtrack-table thead,
+            html.dark .teamtrack-table thead,
+            body.dark .teamtrack-card-header,
+            html.dark .teamtrack-card-header {
+                background-color: #0f172a;
+                border-color: #334155;
+            }
+
+            body.dark .teamtrack-table tbody tr,
+            html.dark .teamtrack-table tbody tr {
+                border-color: #334155;
+            }
+
+            body.dark .teamtrack-table tbody tr:hover,
+            html.dark .teamtrack-table tbody tr:hover {
+                background-color: #334155;
+            }
+
+            body.dark .teamtrack-table td,
+            html.dark .teamtrack-table td,
+            body.dark .teamtrack-intro h1,
+            html.dark .teamtrack-intro h1,
+            body.dark .teamtrack-intro h2,
+            html.dark .teamtrack-intro h2,
+            body.dark .teamtrack-stat-value,
+            html.dark .teamtrack-stat-value,
+            body.dark .teamtrack-brand-title,
+            html.dark .teamtrack-brand-title,
+            body.dark .teamtrack-member-name,
+            html.dark .teamtrack-member-name,
+            body.dark .teamtrack-project-name,
+            html.dark .teamtrack-project-name {
+                color: #f8fafc;
+            }
+
+            body.dark .teamtrack-table th,
+            html.dark .teamtrack-table th,
+            body.dark .teamtrack-subtitle,
+            html.dark .teamtrack-subtitle,
+            body.dark .teamtrack-stat-label,
+            html.dark .teamtrack-stat-label,
+            body.dark .teamtrack-count-badge,
+            html.dark .teamtrack-count-badge {
+                color: #94a3b8;
+            }
+
+            body.dark .teamtrack-input,
+            html.dark .teamtrack-input,
+            body.dark .teamtrack-select,
+            html.dark .teamtrack-select {
+                background-color: #0f172a;
+                border-color: #475569;
+                color: #f8fafc;
+            }
+
+            body.dark .teamtrack-btn-secondary,
+            html.dark .teamtrack-btn-secondary {
+                background-color: #334155;
+                color: #cbd5e1;
+                border-color: #475569;
+            }
+
         </style>
 
+        <div class="teamtrack-layout" id="teamtrack-dashboard">
 
+            <!-- Professional Full-Height Left Sidebar -->
+            <aside class="teamtrack-sidebar" aria-label="TeamTrack Navigation">
+                <div class="teamtrack-sidebar-brand">
+                    <div class="teamtrack-sidebar-logo-icon">
+                        <i class="ri-dashboard-3-line"></i>
+                    </div>
+                    <div class="teamtrack-brand-title">TeamTrack</div>
+                </div>
 
-        <article id="hero">
+                <nav class="teamtrack-sidebar-nav">
+                    <button type="button" class="teamtrack-nav-item active" data-view="dashboard">
+                        <i class="ri-home-4-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button type="button" class="teamtrack-nav-item" data-view="members">
+                        <i class="ri-team-line"></i>
+                        <span>Members</span>
+                    </button>
+                    <button type="button" class="teamtrack-nav-item" data-view="projects">
+                        <i class="ri-folder-3-line"></i>
+                        <span>Projects</span>
+                    </button>
+                    <button type="button" class="teamtrack-nav-item" data-view="overview">
+                        <i class="ri-bar-chart-box-line"></i>
+                        <span>Overview</span>
+                    </button>
+                    <button type="button" class="teamtrack-nav-item teamtrack-nav-disabled" data-view="settings" title="Settings (Team data is managed via JSON data)" disabled>
+                        <i class="ri-settings-3-line"></i>
+                        <span>Settings</span>
+                    </button>
+                </nav>
 
-        </article>
+                <div class="teamtrack-sidebar-footer">
+                    <span>v1.0 • JSON Source</span>
+                </div>
+            </aside>
 
+            <!-- Main Content Area -->
+            <div class="teamtrack-main">
 
+                <!-- Loading State -->
+                <div id="teamtrack-loading" class="teamtrack-card teamtrack-state-box">
+                    <div class="teamtrack-state-icon">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </div>
+                    <p>Loading team data...</p>
+                </div>
 
+                <!-- Error State -->
+                <div id="teamtrack-error" class="teamtrack-error-box" style="display: none;">
+                    <div class="teamtrack-state-icon" style="color: #dc2626;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <h3>Unable to load team data.</h3>
+                    <p>Please check your connection and try again.</p>
+                    <button type="button" id="teamtrack-retry-btn" class="teamtrack-btn teamtrack-btn-primary">
+                        <i class="fa-solid fa-rotate-right"></i> Retry
+                    </button>
+                </div>
 
+                <!-- Content Area -->
+                <div id="teamtrack-content" style="display: none;">
+
+                    <!-- ==========================================
+                         1. DASHBOARD VIEW (RESTORED ORIGINAL DASHBOARD)
+                         ========================================== -->
+                    <div class="teamtrack-view" id="teamtrack-view-dashboard">
+                        <div class="teamtrack-intro">
+                            <h1>TeamTrack</h1>
+                            <p class="teamtrack-subtitle">Team member and project overview.</p>
+                        </div>
+
+                        <!-- Statistics -->
+                        <div class="teamtrack-stats">
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-total">
+                                    <i class="ri-team-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-stat-total">0</span>
+                                    <span class="teamtrack-stat-label">Total Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-active">
+                                    <i class="ri-user-follow-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-stat-active">0</span>
+                                    <span class="teamtrack-stat-label">Active Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-inactive">
+                                    <i class="ri-user-unfollow-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-stat-inactive">0</span>
+                                    <span class="teamtrack-stat-label">Inactive Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-projects">
+                                    <i class="ri-folder-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-stat-projects">0</span>
+                                    <span class="teamtrack-stat-label">Total Projects</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Controls Bar -->
+                        <div class="teamtrack-controls">
+                            <div class="teamtrack-search-box">
+                                <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
+                                <input type="text" id="teamtrack-search-dash" class="teamtrack-input" placeholder="Search by name, project, page, status..." aria-label="Search members">
+                            </div>
+
+                            <div class="teamtrack-filters-group">
+                                <select id="teamtrack-filter-dept-dash" class="teamtrack-select" aria-label="Filter by department">
+                                    <option value="">All Departments</option>
+                                </select>
+
+                                <select id="teamtrack-filter-project-dash" class="teamtrack-select" aria-label="Filter by project">
+                                    <option value="">All Projects</option>
+                                </select>
+
+                                <select id="teamtrack-filter-status-dash" class="teamtrack-select" aria-label="Filter by status">
+                                    <option value="">All Statuses</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+
+                                <button type="button" id="teamtrack-reset-btn-dash" class="teamtrack-btn teamtrack-btn-secondary" title="Reset search and filters">
+                                    <i class="fa-solid fa-rotate-left"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Original Full Member Table Card -->
+                        <div class="teamtrack-card">
+                            <div class="teamtrack-card-header">
+                                <span class="teamtrack-count-badge" id="teamtrack-count-badge-dash">Showing members</span>
+                            </div>
+
+                            <div class="teamtrack-table-wrapper">
+                                <table class="teamtrack-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="teamtrack-cell-num">No.</th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="name">
+                                                Member Name <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="project">
+                                                Project <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="currentPage">
+                                                Current Page <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="startDate">
+                                                Start Date <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="endDate">
+                                                End Date <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="status">
+                                                Status <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="haproId">
+                                                HaproID <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="teamtrack-tbody-dash">
+                                        <!-- Populated dynamically from JSON -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="teamtrack-no-results-dash" class="teamtrack-state-box" style="display: none;">
+                                <div class="teamtrack-state-icon">
+                                    <i class="fa-solid fa-user-slash"></i>
+                                </div>
+                                <p>No matching members found.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         2. MEMBERS VIEW (SIMPLE TEAM MEMBER LIST)
+                         ========================================== -->
+                    <div class="teamtrack-view" id="teamtrack-view-members" style="display: none;">
+                        <div class="teamtrack-intro">
+                            <h2>Team Members</h2>
+                        </div>
+
+                        <!-- Total Team Members Card -->
+                        <div class="teamtrack-stats" style="grid-template-columns: repeat(auto-fit, minmax(200px, 240px)); margin-bottom: 20px;">
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-total">
+                                    <i class="ri-team-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-stat-members-total">0</span>
+                                    <span class="teamtrack-stat-label">Total Team Members</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="teamtrack-controls" style="margin-bottom: 20px;">
+                            <div class="teamtrack-search-box" style="flex: 1 1 100%;">
+                                <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
+                                <input type="text" id="teamtrack-search-mem" class="teamtrack-input" placeholder="Search team members..." aria-label="Search team members">
+                            </div>
+                        </div>
+
+                        <!-- Simple Member List Card -->
+                        <div class="teamtrack-card">
+                            <div class="teamtrack-table-wrapper">
+                                <table class="teamtrack-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="teamtrack-cell-num" style="width: 80px;">Sl.No</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col" style="width: 140px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="teamtrack-tbody-mem">
+                                        <!-- Populated dynamically from JSON -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="teamtrack-no-results-mem" class="teamtrack-state-box" style="display: none;">
+                                <div class="teamtrack-state-icon">
+                                    <i class="fa-solid fa-user-slash"></i>
+                                </div>
+                                <p>No matching members found.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         3. PROJECTS VIEW (UNCHANGED)
+                         ========================================== -->
+                    <div class="teamtrack-view" id="teamtrack-view-projects" style="display: none;">
+                        <div class="teamtrack-intro">
+                            <h2>Projects</h2>
+                        </div>
+
+                        <!-- Projects Search Bar -->
+                        <div class="teamtrack-controls" style="margin-bottom: 20px;">
+                            <div class="teamtrack-search-box" style="flex: 1 1 100%;">
+                                <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
+                                <input type="text" id="teamtrack-search-projects" class="teamtrack-input" placeholder="Search projects..." aria-label="Search projects">
+                            </div>
+                        </div>
+
+                        <!-- Projects Vertical List -->
+                        <div class="teamtrack-projects-grid" id="teamtrack-projects-container">
+                            <!-- Populated dynamically from JSON -->
+                        </div>
+
+                        <div id="teamtrack-no-results-projects" class="teamtrack-state-box" style="display: none;">
+                            <div class="teamtrack-state-icon">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <p>No projects found.</p>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         4. OVERVIEW VIEW (UNCHANGED)
+                         ========================================== -->
+                    <div class="teamtrack-view" id="teamtrack-view-overview" style="display: none;">
+                        <div class="teamtrack-intro">
+                            <h2>Team Overview</h2>
+                            <p class="teamtrack-subtitle">Calculated summary of team distribution, departments, and project assignments.</p>
+                        </div>
+
+                        <!-- Top Stat Cards in Overview -->
+                        <div class="teamtrack-stats">
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-total">
+                                    <i class="ri-team-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-overview-total">0</span>
+                                    <span class="teamtrack-stat-label">Total Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-active">
+                                    <i class="ri-user-follow-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-overview-active">0</span>
+                                    <span class="teamtrack-stat-label">Active Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-inactive">
+                                    <i class="ri-user-unfollow-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-overview-inactive">0</span>
+                                    <span class="teamtrack-stat-label">Inactive Members</span>
+                                </div>
+                            </div>
+
+                            <div class="teamtrack-stat-card">
+                                <div class="teamtrack-stat-icon teamtrack-icon-projects">
+                                    <i class="ri-folder-line"></i>
+                                </div>
+                                <div class="teamtrack-stat-content">
+                                    <span class="teamtrack-stat-value" id="teamtrack-overview-projects">0</span>
+                                    <span class="teamtrack-stat-label">Total Projects</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Summaries Breakdown Grid -->
+                        <div class="teamtrack-overview-grid">
+                            <!-- Department Summary -->
+                            <div class="teamtrack-card">
+                                <div class="teamtrack-card-header">
+                                    <span class="teamtrack-card-title">Department Distribution</span>
+                                </div>
+                                <div id="teamtrack-overview-departments">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+
+                            <!-- Project Assignment Summary -->
+                            <div class="teamtrack-card">
+                                <div class="teamtrack-card-header">
+                                    <span class="teamtrack-card-title">Project Assignments</span>
+                                </div>
+                                <div id="teamtrack-overview-projects-list">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+
+                            <!-- Status Breakdown -->
+                            <div class="teamtrack-card">
+                                <div class="teamtrack-card-header">
+                                    <span class="teamtrack-card-title">Work Status Summary</span>
+                                </div>
+                                <div id="teamtrack-overview-status-breakdown">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Dynamic TeamTrack JavaScript -->
+        <script>
+            (function () {
+                'use strict';
+
+                let allMembers = [];
+                let allProjects = [];
+                let currentSort = { column: '', asc: true };
+
+                const stateLoading = document.getElementById('teamtrack-loading');
+                const stateError = document.getElementById('teamtrack-error');
+                const stateContent = document.getElementById('teamtrack-content');
+                const retryBtn = document.getElementById('teamtrack-retry-btn');
+
+                // Stats elements
+                const statTotal = document.getElementById('teamtrack-stat-total');
+                const statActive = document.getElementById('teamtrack-stat-active');
+                const statInactive = document.getElementById('teamtrack-stat-inactive');
+                const statProjects = document.getElementById('teamtrack-stat-projects');
+
+                const overviewTotal = document.getElementById('teamtrack-overview-total');
+                const overviewActive = document.getElementById('teamtrack-overview-active');
+                const overviewInactive = document.getElementById('teamtrack-overview-inactive');
+                const overviewProjects = document.getElementById('teamtrack-overview-projects');
+
+                // Dashboard controls
+                const searchDash = document.getElementById('teamtrack-search-dash');
+                const filterDeptDash = document.getElementById('teamtrack-filter-dept-dash');
+                const filterProjectDash = document.getElementById('teamtrack-filter-project-dash');
+                const filterStatusDash = document.getElementById('teamtrack-filter-status-dash');
+                const resetBtnDash = document.getElementById('teamtrack-reset-btn-dash');
+                const tbodyDash = document.getElementById('teamtrack-tbody-dash');
+                const countBadgeDash = document.getElementById('teamtrack-count-badge-dash');
+                const noResultsDash = document.getElementById('teamtrack-no-results-dash');
+
+                // Members controls
+                const statMembersTotal = document.getElementById('teamtrack-stat-members-total');
+                const searchMem = document.getElementById('teamtrack-search-mem');
+                const tbodyMem = document.getElementById('teamtrack-tbody-mem');
+                const noResultsMem = document.getElementById('teamtrack-no-results-mem');
+
+                // Projects controls
+                const searchProjects = document.getElementById('teamtrack-search-projects');
+                const noResultsProjects = document.getElementById('teamtrack-no-results-projects');
+
+                function getInitials(name) {
+                    if (!name) return '?';
+                    const parts = name.trim().split(/\s+/);
+                    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+                    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+                }
+
+                function escapeHtml(str) {
+                    if (!str) return '';
+                    return String(str)
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/"/g, '&quot;')
+                        .replace(/'/g, '&#039;');
+                }
+
+                function switchView(viewName) {
+                    // Hide all views
+                    document.querySelectorAll('.teamtrack-view').forEach(function (v) {
+                        v.style.display = 'none';
+                    });
+
+                    // Show target view
+                    const targetView = document.getElementById('teamtrack-view-' + viewName);
+                    if (targetView) {
+                        targetView.style.display = 'block';
+                    }
+
+                    // Update sidebar active buttons
+                    document.querySelectorAll('.teamtrack-nav-item').forEach(function (btn) {
+                        if (btn.getAttribute('data-view') === viewName) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                }
+
+                async function loadData() {
+                    if (stateLoading) stateLoading.style.display = 'block';
+                    if (stateError) stateError.style.display = 'none';
+                    if (stateContent) stateContent.style.display = 'none';
+
+                    try {
+                        const [membersRes, projectsRes] = await Promise.all([
+                            fetch('/data/members.json').then(r => r.ok ? r : fetch('../../data/members.json')),
+                            fetch('/data/projects.json').then(r => r.ok ? r : fetch('../../data/projects.json'))
+                        ]);
+
+                        if (!membersRes.ok || !projectsRes.ok) {
+                            throw new Error('Failed to fetch data');
+                        }
+
+                        allMembers = await membersRes.json();
+                        allProjects = await projectsRes.json();
+
+                        populateStats();
+                        populateFilterDropdowns();
+                        renderTableDash();
+                        renderTableMem();
+                        renderProjectsView();
+                        renderOverviewView();
+
+                        if (stateLoading) stateLoading.style.display = 'none';
+                        if (stateContent) stateContent.style.display = 'block';
+                    } catch (error) {
+                        console.error('[TeamTrack] Error loading team data:', error);
+                        if (stateLoading) stateLoading.style.display = 'none';
+                        if (stateError) stateError.style.display = 'block';
+                        if (stateContent) stateContent.style.display = 'none';
+                    }
+                }
+
+                function populateStats() {
+                    const total = allMembers.length;
+                    const active = allMembers.filter(function (m) {
+                        return (m.status || '').toLowerCase() === 'active';
+                    }).length;
+                    const inactive = allMembers.filter(function (m) {
+                        return (m.status || '').toLowerCase() !== 'active';
+                    }).length;
+                    const projectsCount = allProjects.length;
+
+                    if (statTotal) statTotal.textContent = total;
+                    if (statActive) statActive.textContent = active;
+                    if (statInactive) statInactive.textContent = inactive;
+                    if (statProjects) statProjects.textContent = projectsCount;
+
+                    if (statMembersTotal) statMembersTotal.textContent = total;
+
+                    if (overviewTotal) overviewTotal.textContent = total;
+                    if (overviewActive) overviewActive.textContent = active;
+                    if (overviewInactive) overviewInactive.textContent = inactive;
+                    if (overviewProjects) overviewProjects.textContent = projectsCount;
+                }
+
+                function populateFilterDropdowns() {
+                    // Extract unique departments
+                    const departments = [];
+                    allMembers.forEach(function (m) {
+                        if (m.department && departments.indexOf(m.department) === -1) {
+                            departments.push(m.department);
+                        }
+                    });
+                    departments.sort();
+
+                    // Extract unique project names
+                    const projectNames = [];
+                    allProjects.forEach(function (p) {
+                        if (p.name && projectNames.indexOf(p.name) === -1) {
+                            projectNames.push(p.name);
+                        }
+                    });
+                    allMembers.forEach(function (m) {
+                        const pName = m.project || m.currentProject;
+                        if (pName && projectNames.indexOf(pName) === -1) {
+                            projectNames.push(pName);
+                        }
+                    });
+                    projectNames.sort();
+
+                    // Populate Department dropdown
+                    if (filterDeptDash) {
+                        filterDeptDash.innerHTML = '<option value="">All Departments</option>';
+                        departments.forEach(function (dept) {
+                            const opt = document.createElement('option');
+                            opt.value = dept;
+                            opt.textContent = dept;
+                            filterDeptDash.appendChild(opt);
+                        });
+                    }
+
+                    // Populate Project dropdown
+                    if (filterProjectDash) {
+                        filterProjectDash.innerHTML = '<option value="">All Projects</option>';
+                        projectNames.forEach(function (proj) {
+                            const opt = document.createElement('option');
+                            opt.value = proj;
+                            opt.textContent = proj;
+                            filterProjectDash.appendChild(opt);
+                        });
+                    }
+                }
+
+                function filterMembers(searchVal, deptVal, projVal, statusVal) {
+                    const search = (searchVal || '').trim().toLowerCase();
+                    const dept = deptVal || '';
+                    const proj = projVal || '';
+                    const status = statusVal || '';
+
+                    return allMembers.filter(function (member) {
+                        if (search) {
+                            const name = (member.name || '').toLowerCase();
+                            const project = (member.project || member.currentProject || '').toLowerCase();
+                            const currentPage = (member.currentPage || '').toLowerCase();
+                            const statusStr = (member.status || '').toLowerCase();
+
+                            const matchesSearch = name.indexOf(search) !== -1 ||
+                                                  project.indexOf(search) !== -1 ||
+                                                  currentPage.indexOf(search) !== -1 ||
+                                                  statusStr.indexOf(search) !== -1;
+                            if (!matchesSearch) return false;
+                        }
+
+                        if (dept && member.department && member.department !== dept) return false;
+                        const memberProject = member.project || member.currentProject || '';
+                        if (proj && memberProject !== proj) return false;
+                        if (status && (member.status || '').toLowerCase() !== status.toLowerCase()) return false;
+
+                        return true;
+                    });
+                }
+
+                function sortList(members) {
+                    if (!currentSort.column) return members;
+                    return members.slice().sort(function (a, b) {
+                        let valA, valB;
+                        if (currentSort.column === 'project' || currentSort.column === 'currentProject') {
+                            valA = a.project || a.currentProject;
+                            valB = b.project || b.currentProject;
+                        } else if (currentSort.column === 'currentPage') {
+                            valA = a.currentPage !== undefined ? a.currentPage : a.page;
+                            valB = b.currentPage !== undefined ? b.currentPage : b.page;
+                        } else if (currentSort.column === 'haproId') {
+                            valA = a.haproId;
+                            valB = b.haproId;
+                        } else {
+                            valA = a[currentSort.column];
+                            valB = b[currentSort.column];
+                        }
+                        valA = (valA || '').toString().toLowerCase();
+                        valB = (valB || '').toString().toLowerCase();
+                        if (valA < valB) return currentSort.asc ? -1 : 1;
+                        if (valA > valB) return currentSort.asc ? 1 : -1;
+                        return 0;
+                    });
+                }
+
+                function buildRowsHtml(members) {
+                    return members.map(function (member, index) {
+                        const num = index + 1;
+                        const name = escapeHtml(member.name || '—');
+
+                        const avatarHtml = member.photo ?
+                            '<img src="' + escapeHtml(member.photo) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy">' :
+                            '<div class="teamtrack-avatar-fallback">' + getInitials(member.name) + '</div>';
+
+                        const projectVal = member.currentProject || member.project;
+                        const currentProject = projectVal ?
+                            '<span class="teamtrack-project-badge">' + escapeHtml(projectVal) + '</span>' :
+                            '<span class="teamtrack-unlinked">—</span>';
+
+                        let currentPageHtml = '<span class="teamtrack-unlinked">—</span>';
+                        const pageVal = member.currentPage !== undefined ? member.currentPage : member.page;
+                        if (pageVal && String(pageVal).trim() !== '') {
+                            const rawPage = String(pageVal).trim();
+                            if (/^https?:\/\//i.test(rawPage) || rawPage.startsWith('/') || rawPage.startsWith('./')) {
+                                const linkText = (member.currentPage && !/^https?:\/\//i.test(member.currentPage)) ? escapeHtml(member.currentPage) : 'View';
+                                currentPageHtml = '<a href="' + escapeHtml(rawPage) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-haproid-link">' +
+                                    '<span>' + linkText + '</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>' +
+                                    '</a>';
+                            } else {
+                                currentPageHtml = escapeHtml(rawPage);
+                            }
+                        }
+
+                        const startDate = escapeHtml(member.startDate || '—');
+                        const endDate = escapeHtml(member.endDate || '—');
+
+                        const statusClass = (member.status || '').toLowerCase() === 'active' ? 'status-active' : 'status-inactive';
+                        const statusText = escapeHtml(member.status || 'Inactive');
+                        const statusBadge = '<span class="teamtrack-status-pill ' + statusClass + '">' +
+                            '<span class="teamtrack-status-dot"></span>' +
+                            statusText +
+                            '</span>';
+
+                        const haproIdLink = member.haproId ?
+                            '<a href="' + escapeHtml(member.haproId) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-haproid-link">' +
+                            '<span>View</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>' +
+                            '</a>' :
+                            '<span class="teamtrack-unlinked">—</span>';
+
+                        return '<tr>' +
+                            '<td class="teamtrack-cell-num">' + num + '</td>' +
+                            '<td>' +
+                                '<div class="teamtrack-member-cell">' +
+                                    avatarHtml +
+                                    '<span class="teamtrack-member-name">' + name + '</span>' +
+                                '</div>' +
+                            '</td>' +
+                            '<td>' + currentProject + '</td>' +
+                            '<td>' + currentPageHtml + '</td>' +
+                            '<td>' + startDate + '</td>' +
+                            '<td>' + endDate + '</td>' +
+                            '<td>' + statusBadge + '</td>' +
+                            '<td>' + haproIdLink + '</td>' +
+                            '</tr>';
+                    }).join('');
+                }
+
+                function renderTableDash() {
+                    if (!tbodyDash) return;
+                    const searchVal = searchDash ? searchDash.value : '';
+                    const deptVal = filterDeptDash ? filterDeptDash.value : '';
+                    const projVal = filterProjectDash ? filterProjectDash.value : '';
+                    const statusVal = filterStatusDash ? filterStatusDash.value : '';
+
+                    const filtered = filterMembers(searchVal, deptVal, projVal, statusVal);
+                    const sorted = sortList(filtered);
+
+                    if (countBadgeDash) {
+                        countBadgeDash.textContent = 'Showing ' + sorted.length + ' of ' + allMembers.length + ' members';
+                    }
+
+                    if (sorted.length === 0) {
+                        tbodyDash.innerHTML = '';
+                        if (noResultsDash) noResultsDash.style.display = 'block';
+                    } else {
+                        if (noResultsDash) noResultsDash.style.display = 'none';
+                        tbodyDash.innerHTML = buildRowsHtml(sorted);
+                    }
+                }
+
+                function renderTableMem() {
+                    if (!tbodyMem) return;
+                    const searchVal = (searchMem ? searchMem.value : '').trim().toLowerCase();
+
+                    const filtered = allMembers.filter(function (member) {
+                        if (!searchVal) return true;
+                        const name = (member.name || '').toLowerCase();
+                        return name.indexOf(searchVal) !== -1;
+                    });
+
+                    if (statMembersTotal) {
+                        statMembersTotal.textContent = allMembers.length;
+                    }
+
+                    if (filtered.length === 0) {
+                        tbodyMem.innerHTML = '';
+                        if (noResultsMem) noResultsMem.style.display = 'block';
+                    } else {
+                        if (noResultsMem) noResultsMem.style.display = 'none';
+                        tbodyMem.innerHTML = filtered.map(function (member, index) {
+                            const slNo = String(index + 1).padStart(2, '0');
+                            const name = escapeHtml(member.name || '—');
+                            const status = (member.status || '').toLowerCase() === 'active' ? 'Active' : 'Inactive';
+                            const statusClass = status === 'Active' ? 'status-active' : 'status-inactive';
+                            const statusBadge = '<span class="teamtrack-status-pill ' + statusClass + '">' +
+                                '<span class="teamtrack-status-dot"></span>' +
+                                status +
+                                '</span>';
+
+                            const avatarHtml = member.photo ?
+                                '<img src="' + escapeHtml(member.photo) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy">' :
+                                '<div class="teamtrack-avatar-fallback">' + getInitials(member.name) + '</div>';
+
+                            return '<tr>' +
+                                '<td class="teamtrack-cell-num">' + slNo + '</td>' +
+                                '<td>' +
+                                    '<div class="teamtrack-member-cell">' +
+                                        avatarHtml +
+                                        '<span class="teamtrack-member-name">' + name + '</span>' +
+                                    '</div>' +
+                                '</td>' +
+                                '<td>' + statusBadge + '</td>' +
+                                '</tr>';
+                        }).join('');
+                    }
+                }
+
+                function renderProjectsView() {
+                    const container = document.getElementById('teamtrack-projects-container');
+                    if (!container) return;
+
+                    const query = (searchProjects ? searchProjects.value : '').trim().toLowerCase();
+
+                    const filtered = allProjects.filter(function (project) {
+                        if (!query) return true;
+                        const name = (project.name || '').toLowerCase();
+                        const id = (project.id || '').toLowerCase();
+                        const desc = (project.description || '').toLowerCase();
+                        return name.indexOf(query) !== -1 || id.indexOf(query) !== -1 || desc.indexOf(query) !== -1;
+                    });
+
+                    if (filtered.length === 0) {
+                        container.innerHTML = '';
+                        if (noResultsProjects) noResultsProjects.style.display = 'block';
+                    } else {
+                        if (noResultsProjects) noResultsProjects.style.display = 'none';
+                        container.innerHTML = filtered.map(function (project) {
+                            const assignedMembers = allMembers.filter(function (m) {
+                                const mProj = m.project || m.currentProject || '';
+                                return mProj.toLowerCase() === (project.name || '').toLowerCase();
+                            });
+
+                            const memberTagsHtml = assignedMembers.length > 0 ?
+                                assignedMembers.map(function (m) {
+                                    return '<span class="teamtrack-member-tag"><i class="ri-user-line"></i> ' + escapeHtml(m.name) + '</span>';
+                                }).join('') :
+                                '<span class="teamtrack-unlinked">No members currently assigned</span>';
+
+                            const descriptionHtml = project.description ?
+                                '<p class="teamtrack-project-desc" style="font-size: 0.9rem; color: #64748b; margin: 4px 0 0 0;">' + escapeHtml(project.description) + '</p>' : '';
+
+                            return '<div class="teamtrack-project-card">' +
+                                '<div class="teamtrack-project-card-top">' +
+                                    '<h3 class="teamtrack-project-name">' + escapeHtml(project.name) + '</h3>' +
+                                    (project.id ? '<span class="teamtrack-project-id">' + escapeHtml(project.id) + '</span>' : '') +
+                                '</div>' +
+                                descriptionHtml +
+                                '<div class="teamtrack-project-meta">' +
+                                    '<span class="teamtrack-project-meta-label">Assigned Members (' + assignedMembers.length + ')</span>' +
+                                    '<div class="teamtrack-project-members-tags">' +
+                                        memberTagsHtml +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                        }).join('');
+                    }
+                }
+
+                function renderOverviewView() {
+                    const deptsContainer = document.getElementById('teamtrack-overview-departments');
+                    const projsContainer = document.getElementById('teamtrack-overview-projects-list');
+                    const statusContainer = document.getElementById('teamtrack-overview-status-breakdown');
+                    const total = allMembers.length;
+
+                    // Departments Breakdown
+                    if (deptsContainer) {
+                        const deptCounts = {};
+                        allMembers.forEach(function (m) {
+                            const dept = m.department || 'Unassigned / General';
+                            deptCounts[dept] = (deptCounts[dept] || 0) + 1;
+                        });
+
+                        deptsContainer.innerHTML = Object.keys(deptCounts).map(function (dept) {
+                            const count = deptCounts[dept];
+                            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+                            return '<div class="teamtrack-summary-item">' +
+                                '<div class="teamtrack-summary-row">' +
+                                    '<span class="teamtrack-summary-name">' + escapeHtml(dept) + '</span>' +
+                                    '<span class="teamtrack-summary-val">' + count + ' (' + pct + '%)</span>' +
+                                '</div>' +
+                                '<div class="teamtrack-bar-track">' +
+                                    '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
+                                '</div>' +
+                            '</div>';
+                        }).join('');
+                    }
+
+                    // Projects Breakdown
+                    if (projsContainer) {
+                        projsContainer.innerHTML = allProjects.map(function (p) {
+                            const count = allMembers.filter(function (m) {
+                                const mProj = m.project || m.currentProject || '';
+                                return mProj.toLowerCase() === (p.name || '').toLowerCase();
+                            }).length;
+                            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+
+                            return '<div class="teamtrack-summary-item">' +
+                                '<div class="teamtrack-summary-row">' +
+                                    '<span class="teamtrack-summary-name">' + escapeHtml(p.name) + '</span>' +
+                                    '<span class="teamtrack-summary-val">' + count + ' members (' + pct + '%)</span>' +
+                                '</div>' +
+                                '<div class="teamtrack-bar-track">' +
+                                    '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
+                                '</div>' +
+                            '</div>';
+                        }).join('');
+                    }
+
+                    // Status Breakdown
+                    if (statusContainer) {
+                        const activeCount = allMembers.filter(function (m) {
+                            return (m.status || '').toLowerCase() === 'active';
+                        }).length;
+                        const inactiveCount = total - activeCount;
+                        const activePct = total > 0 ? Math.round((activeCount / total) * 100) : 0;
+                        const inactivePct = total > 0 ? Math.round((inactiveCount / total) * 100) : 0;
+
+                        statusContainer.innerHTML =
+                            '<div class="teamtrack-summary-item">' +
+                                '<div class="teamtrack-summary-row">' +
+                                    '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#10b981;margin-right:6px;"></span> Active</span>' +
+                                    '<span class="teamtrack-summary-val">' + activeCount + ' (' + activePct + '%)</span>' +
+                                '</div>' +
+                                '<div class="teamtrack-bar-track">' +
+                                    '<div class="teamtrack-bar-fill" style="width: ' + activePct + '%; background: #10b981;"></div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="teamtrack-summary-item">' +
+                                '<div class="teamtrack-summary-row">' +
+                                    '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#ef4444;margin-right:6px;"></span> Inactive</span>' +
+                                    '<span class="teamtrack-summary-val">' + inactiveCount + ' (' + inactivePct + '%)</span>' +
+                                '</div>' +
+                                '<div class="teamtrack-bar-track">' +
+                                    '<div class="teamtrack-bar-fill" style="width: ' + inactivePct + '%; background: #ef4444;"></div>' +
+                                '</div>' +
+                            '</div>';
+                    }
+                }
+
+                // Dashboard Event listeners
+                if (searchDash) searchDash.addEventListener('input', renderTableDash);
+                if (filterDeptDash) filterDeptDash.addEventListener('change', renderTableDash);
+                if (filterProjectDash) filterProjectDash.addEventListener('change', renderTableDash);
+                if (filterStatusDash) filterStatusDash.addEventListener('change', renderTableDash);
+                if (resetBtnDash) {
+                    resetBtnDash.addEventListener('click', function () {
+                        if (searchDash) searchDash.value = '';
+                        if (filterDeptDash) filterDeptDash.value = '';
+                        if (filterProjectDash) filterProjectDash.value = '';
+                        if (filterStatusDash) filterStatusDash.value = '';
+                        renderTableDash();
+                    });
+                }
+
+                // Members Event listeners
+                if (searchMem) searchMem.addEventListener('input', renderTableMem);
+
+                // Projects Event listeners
+                if (searchProjects) searchProjects.addEventListener('input', renderProjectsView);
+
+                if (retryBtn) {
+                    retryBtn.addEventListener('click', loadData);
+                }
+
+                // Table sorting headers
+                document.querySelectorAll('.teamtrack-sort-header').forEach(function (header) {
+                    header.addEventListener('click', function () {
+                        const col = this.getAttribute('data-sort');
+                        if (currentSort.column === col) {
+                            currentSort.asc = !currentSort.asc;
+                        } else {
+                            currentSort.column = col;
+                            currentSort.asc = true;
+                        }
+
+                        document.querySelectorAll('.teamtrack-sort-header').forEach(function (h) {
+                            h.classList.remove('sorted-asc', 'sorted-desc');
+                            const icon = h.querySelector('i');
+                            if (icon) icon.className = 'fa-solid fa-sort';
+                        });
+
+                        this.classList.add(currentSort.asc ? 'sorted-asc' : 'sorted-desc');
+                        const icon = this.querySelector('i');
+                        if (icon) {
+                            icon.className = currentSort.asc ? 'fa-solid fa-sort-up' : 'fa-solid fa-sort-down';
+                        }
+
+                        renderTableDash();
+                    });
+                });
+
+                // Sidebar navigation view switching
+                document.querySelectorAll('.teamtrack-nav-item:not(.teamtrack-nav-disabled)').forEach(function (item) {
+                    item.addEventListener('click', function () {
+                        const view = this.getAttribute('data-view');
+                        if (view) {
+                            switchView(view);
+                        }
+                    });
+                });
+
+                loadData();
+            })();
+        </script>
 
     </main>
 
