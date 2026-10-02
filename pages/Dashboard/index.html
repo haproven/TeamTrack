@@ -81,6 +81,21 @@
     </script>
 
 
+    <style>
+        @media (min-width: 1400px) {
+
+            .header,
+            .section,
+            .footer {
+                padding: 10px 1%;
+            }
+        }
+
+        #header.hide {
+            transform: translateY(0%) !important;
+        }
+    </style>
+
 
 
 
@@ -1061,7 +1076,7 @@
                     grid-template-columns: 1fr;
                 }
             }
-        
+
             /* Dark theme support for TeamTrack content */
             body.dark .teamtrack-sidebar,
             html.dark .teamtrack-sidebar,
@@ -1139,7 +1154,6 @@
                 color: #cbd5e1;
                 border-color: #475569;
             }
-
         </style>
 
         <div class="teamtrack-layout" id="teamtrack-dashboard">
@@ -1170,7 +1184,8 @@
                         <i class="ri-bar-chart-box-line"></i>
                         <span>Overview</span>
                     </button>
-                    <button type="button" class="teamtrack-nav-item teamtrack-nav-disabled" data-view="settings" title="Settings (Team data is managed via JSON data)" disabled>
+                    <button type="button" class="teamtrack-nav-item teamtrack-nav-disabled" data-view="settings"
+                        title="Settings (Team data is managed via JSON data)" disabled>
                         <i class="ri-settings-3-line"></i>
                         <span>Settings</span>
                     </button>
@@ -1263,25 +1278,30 @@
                         <div class="teamtrack-controls">
                             <div class="teamtrack-search-box">
                                 <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
-                                <input type="text" id="teamtrack-search-dash" class="teamtrack-input" placeholder="Search by name, project, page, status..." aria-label="Search members">
+                                <input type="text" id="teamtrack-search-dash" class="teamtrack-input"
+                                    placeholder="Search by name, project, page, status..." aria-label="Search members">
                             </div>
 
                             <div class="teamtrack-filters-group">
-                                <select id="teamtrack-filter-dept-dash" class="teamtrack-select" aria-label="Filter by department">
+                                <select id="teamtrack-filter-dept-dash" class="teamtrack-select"
+                                    aria-label="Filter by department">
                                     <option value="">All Departments</option>
                                 </select>
 
-                                <select id="teamtrack-filter-project-dash" class="teamtrack-select" aria-label="Filter by project">
+                                <select id="teamtrack-filter-project-dash" class="teamtrack-select"
+                                    aria-label="Filter by project">
                                     <option value="">All Projects</option>
                                 </select>
 
-                                <select id="teamtrack-filter-status-dash" class="teamtrack-select" aria-label="Filter by status">
+                                <select id="teamtrack-filter-status-dash" class="teamtrack-select"
+                                    aria-label="Filter by status">
                                     <option value="">All Statuses</option>
                                     <option value="Active">Active</option>
                                     <option value="Inactive">Inactive</option>
                                 </select>
 
-                                <button type="button" id="teamtrack-reset-btn-dash" class="teamtrack-btn teamtrack-btn-secondary" title="Reset search and filters">
+                                <button type="button" id="teamtrack-reset-btn-dash"
+                                    class="teamtrack-btn teamtrack-btn-secondary" title="Reset search and filters">
                                     <i class="fa-solid fa-rotate-left"></i> Reset
                                 </button>
                             </div>
@@ -1290,7 +1310,8 @@
                         <!-- Original Full Member Table Card -->
                         <div class="teamtrack-card">
                             <div class="teamtrack-card-header">
-                                <span class="teamtrack-count-badge" id="teamtrack-count-badge-dash">Showing members</span>
+                                <span class="teamtrack-count-badge" id="teamtrack-count-badge-dash">Showing
+                                    members</span>
                             </div>
 
                             <div class="teamtrack-table-wrapper">
@@ -1345,7 +1366,8 @@
                         </div>
 
                         <!-- Total Team Members Card -->
-                        <div class="teamtrack-stats" style="grid-template-columns: repeat(auto-fit, minmax(200px, 240px)); margin-bottom: 20px;">
+                        <div class="teamtrack-stats"
+                            style="grid-template-columns: repeat(auto-fit, minmax(200px, 240px)); margin-bottom: 20px;">
                             <div class="teamtrack-stat-card">
                                 <div class="teamtrack-stat-icon teamtrack-icon-total">
                                     <i class="ri-team-line"></i>
@@ -1361,7 +1383,8 @@
                         <div class="teamtrack-controls" style="margin-bottom: 20px;">
                             <div class="teamtrack-search-box" style="flex: 1 1 100%;">
                                 <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
-                                <input type="text" id="teamtrack-search-mem" class="teamtrack-input" placeholder="Search team members..." aria-label="Search team members">
+                                <input type="text" id="teamtrack-search-mem" class="teamtrack-input"
+                                    placeholder="Search team members..." aria-label="Search team members">
                             </div>
                         </div>
 
@@ -1403,7 +1426,8 @@
                         <div class="teamtrack-controls" style="margin-bottom: 20px;">
                             <div class="teamtrack-search-box" style="flex: 1 1 100%;">
                                 <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
-                                <input type="text" id="teamtrack-search-projects" class="teamtrack-input" placeholder="Search projects..." aria-label="Search projects">
+                                <input type="text" id="teamtrack-search-projects" class="teamtrack-input"
+                                    placeholder="Search projects..." aria-label="Search projects">
                             </div>
                         </div>
 
@@ -1426,7 +1450,8 @@
                     <div class="teamtrack-view" id="teamtrack-view-overview" style="display: none;">
                         <div class="teamtrack-intro">
                             <h2>Team Overview</h2>
-                            <p class="teamtrack-subtitle">Calculated summary of team distribution, departments, and project assignments.</p>
+                            <p class="teamtrack-subtitle">Calculated summary of team distribution, departments, and
+                                project assignments.</p>
                         </div>
 
                         <!-- Top Stat Cards in Overview -->
@@ -1716,9 +1741,9 @@
                             const statusStr = (member.status || '').toLowerCase();
 
                             const matchesSearch = name.indexOf(search) !== -1 ||
-                                                  project.indexOf(search) !== -1 ||
-                                                  currentPage.indexOf(search) !== -1 ||
-                                                  statusStr.indexOf(search) !== -1;
+                                project.indexOf(search) !== -1 ||
+                                currentPage.indexOf(search) !== -1 ||
+                                statusStr.indexOf(search) !== -1;
                             if (!matchesSearch) return false;
                         }
 
@@ -1803,10 +1828,10 @@
                         return '<tr>' +
                             '<td class="teamtrack-cell-num">' + num + '</td>' +
                             '<td>' +
-                                '<div class="teamtrack-member-cell">' +
-                                    avatarHtml +
-                                    '<span class="teamtrack-member-name">' + name + '</span>' +
-                                '</div>' +
+                            '<div class="teamtrack-member-cell">' +
+                            avatarHtml +
+                            '<span class="teamtrack-member-name">' + name + '</span>' +
+                            '</div>' +
                             '</td>' +
                             '<td>' + currentProject + '</td>' +
                             '<td>' + currentPageHtml + '</td>' +
@@ -1877,10 +1902,10 @@
                             return '<tr>' +
                                 '<td class="teamtrack-cell-num">' + slNo + '</td>' +
                                 '<td>' +
-                                    '<div class="teamtrack-member-cell">' +
-                                        avatarHtml +
-                                        '<span class="teamtrack-member-name">' + name + '</span>' +
-                                    '</div>' +
+                                '<div class="teamtrack-member-cell">' +
+                                avatarHtml +
+                                '<span class="teamtrack-member-name">' + name + '</span>' +
+                                '</div>' +
                                 '</td>' +
                                 '<td>' + statusBadge + '</td>' +
                                 '</tr>';
@@ -1924,17 +1949,17 @@
 
                             return '<div class="teamtrack-project-card">' +
                                 '<div class="teamtrack-project-card-top">' +
-                                    '<h3 class="teamtrack-project-name">' + escapeHtml(project.name) + '</h3>' +
-                                    (project.id ? '<span class="teamtrack-project-id">' + escapeHtml(project.id) + '</span>' : '') +
+                                '<h3 class="teamtrack-project-name">' + escapeHtml(project.name) + '</h3>' +
+                                (project.id ? '<span class="teamtrack-project-id">' + escapeHtml(project.id) + '</span>' : '') +
                                 '</div>' +
                                 descriptionHtml +
                                 '<div class="teamtrack-project-meta">' +
-                                    '<span class="teamtrack-project-meta-label">Assigned Members (' + assignedMembers.length + ')</span>' +
-                                    '<div class="teamtrack-project-members-tags">' +
-                                        memberTagsHtml +
-                                    '</div>' +
+                                '<span class="teamtrack-project-meta-label">Assigned Members (' + assignedMembers.length + ')</span>' +
+                                '<div class="teamtrack-project-members-tags">' +
+                                memberTagsHtml +
                                 '</div>' +
-                            '</div>';
+                                '</div>' +
+                                '</div>';
                         }).join('');
                     }
                 }
@@ -1958,13 +1983,13 @@
                             const pct = total > 0 ? Math.round((count / total) * 100) : 0;
                             return '<div class="teamtrack-summary-item">' +
                                 '<div class="teamtrack-summary-row">' +
-                                    '<span class="teamtrack-summary-name">' + escapeHtml(dept) + '</span>' +
-                                    '<span class="teamtrack-summary-val">' + count + ' (' + pct + '%)</span>' +
+                                '<span class="teamtrack-summary-name">' + escapeHtml(dept) + '</span>' +
+                                '<span class="teamtrack-summary-val">' + count + ' (' + pct + '%)</span>' +
                                 '</div>' +
                                 '<div class="teamtrack-bar-track">' +
-                                    '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
+                                '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
                                 '</div>' +
-                            '</div>';
+                                '</div>';
                         }).join('');
                     }
 
@@ -1979,13 +2004,13 @@
 
                             return '<div class="teamtrack-summary-item">' +
                                 '<div class="teamtrack-summary-row">' +
-                                    '<span class="teamtrack-summary-name">' + escapeHtml(p.name) + '</span>' +
-                                    '<span class="teamtrack-summary-val">' + count + ' members (' + pct + '%)</span>' +
+                                '<span class="teamtrack-summary-name">' + escapeHtml(p.name) + '</span>' +
+                                '<span class="teamtrack-summary-val">' + count + ' members (' + pct + '%)</span>' +
                                 '</div>' +
                                 '<div class="teamtrack-bar-track">' +
-                                    '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
+                                '<div class="teamtrack-bar-fill" style="width: ' + pct + '%;"></div>' +
                                 '</div>' +
-                            '</div>';
+                                '</div>';
                         }).join('');
                     }
 
@@ -2000,22 +2025,22 @@
 
                         statusContainer.innerHTML =
                             '<div class="teamtrack-summary-item">' +
-                                '<div class="teamtrack-summary-row">' +
-                                    '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#10b981;margin-right:6px;"></span> Active</span>' +
-                                    '<span class="teamtrack-summary-val">' + activeCount + ' (' + activePct + '%)</span>' +
-                                '</div>' +
-                                '<div class="teamtrack-bar-track">' +
-                                    '<div class="teamtrack-bar-fill" style="width: ' + activePct + '%; background: #10b981;"></div>' +
-                                '</div>' +
+                            '<div class="teamtrack-summary-row">' +
+                            '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#10b981;margin-right:6px;"></span> Active</span>' +
+                            '<span class="teamtrack-summary-val">' + activeCount + ' (' + activePct + '%)</span>' +
+                            '</div>' +
+                            '<div class="teamtrack-bar-track">' +
+                            '<div class="teamtrack-bar-fill" style="width: ' + activePct + '%; background: #10b981;"></div>' +
+                            '</div>' +
                             '</div>' +
                             '<div class="teamtrack-summary-item">' +
-                                '<div class="teamtrack-summary-row">' +
-                                    '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#ef4444;margin-right:6px;"></span> Inactive</span>' +
-                                    '<span class="teamtrack-summary-val">' + inactiveCount + ' (' + inactivePct + '%)</span>' +
-                                '</div>' +
-                                '<div class="teamtrack-bar-track">' +
-                                    '<div class="teamtrack-bar-fill" style="width: ' + inactivePct + '%; background: #ef4444;"></div>' +
-                                '</div>' +
+                            '<div class="teamtrack-summary-row">' +
+                            '<span class="teamtrack-summary-name"><span class="teamtrack-status-dot" style="display:inline-block;background:#ef4444;margin-right:6px;"></span> Inactive</span>' +
+                            '<span class="teamtrack-summary-val">' + inactiveCount + ' (' + inactivePct + '%)</span>' +
+                            '</div>' +
+                            '<div class="teamtrack-bar-track">' +
+                            '<div class="teamtrack-bar-fill" style="width: ' + inactivePct + '%; background: #ef4444;"></div>' +
+                            '</div>' +
                             '</div>';
                     }
                 }

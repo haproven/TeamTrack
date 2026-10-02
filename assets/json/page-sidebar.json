@@ -1,0 +1,65 @@
+{
+  "default": {
+    "navigation": [
+      {
+        "title": "Dashboard",
+        "icon": "ri-home-4-line",
+        "href": "/pages/Dashboard/index.html#teamtrack-view-dashboard"
+      },
+      {
+        "title": "Members",
+        "icon": "ri-team-line",
+        "href": "/pages/Dashboard/index.html#teamtrack-view-members"
+      },
+      {
+        "title": "Home",
+        "icon": "ri-home-4-line",
+        "href": "/"
+      }
+    ]
+  },
+  "pages": {
+    "/pages/Dashboard/index.html": {
+      "navigation": [
+        {
+          "title": "TeamTrack",
+          "icon": "ri-dashboard-3-line",
+          "href": "/pages/Dashboard/index.html",
+          "children": [
+            {
+              "title": "Projects",
+              "icon": "ri-folder-3-line",
+              "href": "/pages/Dashboard/index.html#teamtrack-view-projects"
+            },
+            {
+              "title": "Overview",
+              "icon": "ri-bar-chart-box-line",
+              "href": "/pages/Dashboard/index.html#teamtrack-view-overview"
+            }
+          ]
+        }
+      ]
+    },
+    "/pages/team/index.html": {
+      "navigation": [
+        {
+          "title": "Projects",
+          "icon": "ri-folder-3-line",
+          "href": "/pages/Projects/index.html",
+          "children": [
+            {
+              "title": "All Projects",
+              "icon": "ri-folder-open-line",
+              "href": "/pages/Projects/index.html#all-projects"
+            },
+            {
+              "title": "Active Projects",
+              "icon": "ri-time-line",
+              "href": "/pages/Projects/index.html#active-projects"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
