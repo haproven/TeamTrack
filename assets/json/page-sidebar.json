@@ -43,7 +43,7 @@
     "/pages/team/index.html": {
       "navigation": [
         {
-          "title": "Projects",
+          "title": "TeamTrack",
           "icon": "ri-folder-3-line",
           "href": "/pages/Projects/index.html",
           "children": [
