@@ -1556,9 +1556,9 @@
                                 <table class="teamtrack-table">
                                     <thead>
                                         <tr>
-                                            <th scope="col" class="teamtrack-cell-num" style="width: 80px;">Sl.No</th>
+                                            <th scope="col" class="teamtrack-cell-num" style="width: 80px;">No.</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col" style="width: 140px;">Status</th>
+                                            <th scope="col" style="width: 160px;">HaproID</th>
                                         </tr>
                                     </thead>
                                     <tbody id="teamtrack-tbody-mem">
@@ -2067,7 +2067,7 @@
                     });
 
                     if (statMembersTotal) {
-                        statMembersTotal.textContent = allMembers.length;
+                        statMembersTotal.textContent = searchVal ? filtered.length : allMembers.length;
                     }
 
                     if (filtered.length === 0) {
@@ -2078,18 +2078,19 @@
                         tbodyMem.innerHTML = filtered.map(function (member, index) {
                             const slNo = String(index + 1).padStart(2, '0');
                             const name = escapeHtml(member.name || '—');
-                            const status = (member.status || '').toLowerCase() === 'active' ? 'Active' : 'Inactive';
-                            const statusClass = status === 'Active' ? 'status-active' : 'status-inactive';
-                            const statusBadge = '<span class="teamtrack-status-pill ' + statusClass + '">' +
-                                '<span class="teamtrack-status-dot"></span>' +
-                                status +
-                                '</span>';
 
                             const cleanPhoto = (member.photo || '').trim();
                             const initials = getInitials(member.name);
                             const avatarHtml = cleanPhoto ?
                                 '<img src="' + escapeHtml(cleanPhoto) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';var f=document.createElement(\'div\');f.className=\'teamtrack-avatar-fallback\';f.textContent=\'' + escapeHtml(initials) + '\';this.parentNode.insertBefore(f,this);">' :
                                 '<div class="teamtrack-avatar-fallback">' + escapeHtml(initials) + '</div>';
+
+                            const hasValidHaproId = !!(member.haproId && /^https?:\/\//i.test(member.haproId.trim()));
+                            const haproIdLink = hasValidHaproId ?
+                                '<a href="' + escapeHtml(member.haproId.trim()) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-haproid-link">' +
+                                '<span>View</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>' +
+                                '</a>' :
+                                '<span class="teamtrack-unlinked">—</span>';
 
                             return '<tr>' +
                                 '<td class="teamtrack-cell-num">' + slNo + '</td>' +
@@ -2099,7 +2100,7 @@
                                 '<span class="teamtrack-member-name">' + name + '</span>' +
                                 '</div>' +
                                 '</td>' +
-                                '<td>' + statusBadge + '</td>' +
+                                '<td>' + haproIdLink + '</td>' +
                                 '</tr>';
                         }).join('');
                     }
