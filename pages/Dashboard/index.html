@@ -716,8 +716,19 @@
             .teamtrack-cell-num {
                 font-weight: 600;
                 color: #94a3b8;
-                width: 42px;
+                width: 48px;
                 padding-left: 12px;
+            }
+
+            .teamtrack-cell-photo {
+                width: 52px;
+                text-align: center;
+                padding: 8px 10px;
+            }
+
+            .teamtrack-cell-photo .teamtrack-avatar,
+            .teamtrack-cell-photo .teamtrack-avatar-fallback {
+                margin: 0 auto;
             }
 
             .teamtrack-member-cell {
@@ -728,17 +739,18 @@
             }
 
             .teamtrack-avatar {
-                width: 32px;
-                height: 32px;
+                width: 34px;
+                height: 34px;
                 border-radius: 50%;
                 object-fit: cover;
                 flex-shrink: 0;
                 background-color: #e2e8f0;
+                display: block;
             }
 
             .teamtrack-avatar-fallback {
-                width: 32px;
-                height: 32px;
+                width: 34px;
+                height: 34px;
                 border-radius: 50%;
                 background: linear-gradient(135deg, #3b82f6, #6366f1);
                 color: #ffffff;
@@ -754,6 +766,46 @@
             .teamtrack-member-name {
                 font-weight: 600;
                 color: #0f172a;
+            }
+
+            .teamtrack-name-link {
+                color: inherit;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                transition: color 0.15s ease;
+            }
+
+            .teamtrack-name-link:hover {
+                color: var(--teamtrack-accent, #2563eb);
+                text-decoration: underline;
+            }
+
+            .teamtrack-name-link:hover .teamtrack-member-name {
+                color: var(--teamtrack-accent, #2563eb);
+            }
+
+            .teamtrack-link-icon {
+                font-size: 0.72rem;
+                opacity: 0.55;
+                transition: opacity 0.15s ease, transform 0.15s ease;
+            }
+
+            .teamtrack-name-link:hover .teamtrack-link-icon {
+                opacity: 1;
+                transform: translate(1px, -1px);
+            }
+
+            .teamtrack-avatar-link {
+                display: inline-flex;
+                border-radius: 50%;
+                transition: transform 0.15s ease, opacity 0.15s ease;
+            }
+
+            .teamtrack-avatar-link:hover {
+                transform: scale(1.08);
+                opacity: 0.9;
             }
 
             .teamtrack-project-badge {
@@ -1391,7 +1443,7 @@
                             <div class="teamtrack-search-box">
                                 <i class="fa-solid fa-magnifying-glass teamtrack-search-icon"></i>
                                 <input type="text" id="teamtrack-search-dash" class="teamtrack-input"
-                                    placeholder="Search by name, project, page, status..." aria-label="Search members">
+                                    placeholder="Search by name, role, department, project, status..." aria-label="Search members">
                             </div>
 
                             <div class="teamtrack-filters-group">
@@ -1431,26 +1483,24 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="teamtrack-cell-num">No.</th>
+                                            <th scope="col" class="teamtrack-cell-photo">Photo</th>
                                             <th scope="col" class="teamtrack-sort-header" data-sort="name">
-                                                Member Name <i class="fa-solid fa-sort"></i>
+                                                Name <i class="fa-solid fa-sort"></i>
                                             </th>
-                                            <th scope="col" class="teamtrack-sort-header" data-sort="project">
-                                                Project <i class="fa-solid fa-sort"></i>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="role">
+                                                Role <i class="fa-solid fa-sort"></i>
                                             </th>
-                                            <th scope="col" class="teamtrack-sort-header" data-sort="currentPage">
-                                                Current Page <i class="fa-solid fa-sort"></i>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="department">
+                                                Department <i class="fa-solid fa-sort"></i>
+                                            </th>
+                                            <th scope="col" class="teamtrack-sort-header" data-sort="currentProject">
+                                                Current Project <i class="fa-solid fa-sort"></i>
                                             </th>
                                             <th scope="col" class="teamtrack-sort-header" data-sort="startDate">
                                                 Start Date <i class="fa-solid fa-sort"></i>
                                             </th>
-                                            <th scope="col" class="teamtrack-sort-header" data-sort="endDate">
-                                                End Date <i class="fa-solid fa-sort"></i>
-                                            </th>
                                             <th scope="col" class="teamtrack-sort-header" data-sort="status">
                                                 Status <i class="fa-solid fa-sort"></i>
-                                            </th>
-                                            <th scope="col" class="teamtrack-sort-header" data-sort="haproId">
-                                                HaproID <i class="fa-solid fa-sort"></i>
                                             </th>
                                         </tr>
                                     </thead>
@@ -1771,10 +1821,10 @@
                 function populateStats() {
                     const total = allMembers.length;
                     const active = allMembers.filter(function (m) {
-                        return (m.status || '').toLowerCase() === 'active';
+                        return (m.status || '').trim().toLowerCase() === 'active';
                     }).length;
                     const inactive = allMembers.filter(function (m) {
-                        return (m.status || '').toLowerCase() !== 'active';
+                        return (m.status || '').trim().toLowerCase() === 'inactive';
                     }).length;
                     const projectsCount = allProjects.length;
 
@@ -1795,8 +1845,9 @@
                     // Extract unique departments
                     const departments = [];
                     allMembers.forEach(function (m) {
-                        if (m.department && departments.indexOf(m.department) === -1) {
-                            departments.push(m.department);
+                        const dept = (m.department || '').trim();
+                        if (dept && departments.indexOf(dept) === -1) {
+                            departments.push(dept);
                         }
                     });
                     departments.sort();
@@ -1804,12 +1855,13 @@
                     // Extract unique project names
                     const projectNames = [];
                     allProjects.forEach(function (p) {
-                        if (p.name && projectNames.indexOf(p.name) === -1) {
-                            projectNames.push(p.name);
+                        const pName = (p.name || '').trim();
+                        if (pName && projectNames.indexOf(pName) === -1) {
+                            projectNames.push(pName);
                         }
                     });
                     allMembers.forEach(function (m) {
-                        const pName = m.project || m.currentProject;
+                        const pName = (m.currentProject || m.project || '').trim();
                         if (pName && projectNames.indexOf(pName) === -1) {
                             projectNames.push(pName);
                         }
@@ -1818,6 +1870,7 @@
 
                     // Populate Department dropdown
                     if (filterDeptDash) {
+                        const currentVal = filterDeptDash.value;
                         filterDeptDash.innerHTML = '<option value="">All Departments</option>';
                         departments.forEach(function (dept) {
                             const opt = document.createElement('option');
@@ -1825,10 +1878,12 @@
                             opt.textContent = dept;
                             filterDeptDash.appendChild(opt);
                         });
+                        filterDeptDash.value = currentVal;
                     }
 
                     // Populate Project dropdown
                     if (filterProjectDash) {
+                        const currentVal = filterProjectDash.value;
                         filterProjectDash.innerHTML = '<option value="">All Projects</option>';
                         projectNames.forEach(function (proj) {
                             const opt = document.createElement('option');
@@ -1836,33 +1891,46 @@
                             opt.textContent = proj;
                             filterProjectDash.appendChild(opt);
                         });
+                        filterProjectDash.value = currentVal;
                     }
                 }
 
                 function filterMembers(searchVal, deptVal, projVal, statusVal) {
                     const search = (searchVal || '').trim().toLowerCase();
-                    const dept = deptVal || '';
-                    const proj = projVal || '';
-                    const status = statusVal || '';
+                    const dept = (deptVal || '').trim();
+                    const proj = (projVal || '').trim();
+                    const status = (statusVal || '').trim().toLowerCase();
 
                     return allMembers.filter(function (member) {
                         if (search) {
                             const name = (member.name || '').toLowerCase();
-                            const project = (member.project || member.currentProject || '').toLowerCase();
-                            const currentPage = (member.currentPage || '').toLowerCase();
+                            const role = (member.role || '').toLowerCase();
+                            const department = (member.department || '').toLowerCase();
+                            const project = (member.currentProject || member.project || '').toLowerCase();
                             const statusStr = (member.status || '').toLowerCase();
 
                             const matchesSearch = name.indexOf(search) !== -1 ||
+                                role.indexOf(search) !== -1 ||
+                                department.indexOf(search) !== -1 ||
                                 project.indexOf(search) !== -1 ||
-                                currentPage.indexOf(search) !== -1 ||
                                 statusStr.indexOf(search) !== -1;
                             if (!matchesSearch) return false;
                         }
 
-                        if (dept && member.department && member.department !== dept) return false;
-                        const memberProject = member.project || member.currentProject || '';
-                        if (proj && memberProject !== proj) return false;
-                        if (status && (member.status || '').toLowerCase() !== status.toLowerCase()) return false;
+                        if (dept) {
+                            const memberDept = (member.department || '').trim();
+                            if (memberDept !== dept) return false;
+                        }
+
+                        if (proj) {
+                            const memberProject = (member.currentProject || member.project || '').trim();
+                            if (memberProject !== proj) return false;
+                        }
+
+                        if (status) {
+                            const memberStatus = (member.status || '').trim().toLowerCase();
+                            if (memberStatus !== status) return false;
+                        }
 
                         return true;
                     });
@@ -1872,15 +1940,9 @@
                     if (!currentSort.column) return members;
                     return members.slice().sort(function (a, b) {
                         let valA, valB;
-                        if (currentSort.column === 'project' || currentSort.column === 'currentProject') {
-                            valA = a.project || a.currentProject;
-                            valB = b.project || b.currentProject;
-                        } else if (currentSort.column === 'currentPage') {
-                            valA = a.currentPage !== undefined ? a.currentPage : a.page;
-                            valB = b.currentPage !== undefined ? b.currentPage : b.page;
-                        } else if (currentSort.column === 'haproId') {
-                            valA = a.haproId;
-                            valB = b.haproId;
+                        if (currentSort.column === 'currentProject' || currentSort.column === 'project') {
+                            valA = a.currentProject !== undefined ? a.currentProject : a.project;
+                            valB = b.currentProject !== undefined ? b.currentProject : b.project;
                         } else {
                             valA = a[currentSort.column];
                             valB = b[currentSort.column];
@@ -1895,62 +1957,78 @@
 
                 function buildRowsHtml(members) {
                     return members.map(function (member, index) {
-                        const num = index + 1;
-                        const name = escapeHtml(member.name || '—');
+                        const num = String(index + 1).padStart(2, '0');
+                        const nameVal = (member.name || '').trim();
+                        const hasValidHaproId = !!(member.haproId && /^https?:\/\//i.test(member.haproId.trim()));
+                        const haproUrl = hasValidHaproId ? member.haproId.trim() : '';
 
-                        const avatarHtml = member.photo ?
-                            '<img src="' + escapeHtml(member.photo) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy">' :
-                            '<div class="teamtrack-avatar-fallback">' + getInitials(member.name) + '</div>';
+                        // 2. Photo Column with Fallback Avatar
+                        const initials = getInitials(nameVal);
+                        let avatarHtml;
+                        const cleanPhoto = (member.photo || '').trim();
+                        if (cleanPhoto) {
+                            avatarHtml = '<img src="' + escapeHtml(cleanPhoto) + '" alt="' + escapeHtml(nameVal || 'Member') + '" class="teamtrack-avatar" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';var f=document.createElement(\'div\');f.className=\'teamtrack-avatar-fallback\';f.textContent=\'' + escapeHtml(initials) + '\';this.parentNode.insertBefore(f,this);">';
+                        } else {
+                            avatarHtml = '<div class="teamtrack-avatar-fallback">' + escapeHtml(initials) + '</div>';
+                        }
 
-                        const projectVal = member.currentProject || member.project;
-                        const currentProject = projectVal ?
+                        const photoCellContent = hasValidHaproId ?
+                            '<a href="' + escapeHtml(haproUrl) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-avatar-link" title="View HaproID profile">' + avatarHtml + '</a>' :
+                            avatarHtml;
+
+                        // 3. Name Column (linked if haproId available, fallback to —)
+                        let nameCellContent;
+                        if (nameVal && hasValidHaproId) {
+                            nameCellContent = '<a href="' + escapeHtml(haproUrl) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-name-link" title="View HaproID profile">' +
+                                '<span class="teamtrack-member-name">' + escapeHtml(nameVal) + '</span>' +
+                                ' <i class="fa-solid fa-arrow-up-right-from-square teamtrack-link-icon"></i>' +
+                                '</a>';
+                        } else if (nameVal) {
+                            nameCellContent = '<span class="teamtrack-member-name">' + escapeHtml(nameVal) + '</span>';
+                        } else {
+                            nameCellContent = '<span class="teamtrack-unlinked">—</span>';
+                        }
+
+                        // 4. Role Column
+                        const roleVal = (member.role || '').trim();
+                        const roleHtml = roleVal ? escapeHtml(roleVal) : '<span class="teamtrack-unlinked">—</span>';
+
+                        // 5. Department Column
+                        const deptVal = (member.department || '').trim();
+                        const deptHtml = deptVal ? escapeHtml(deptVal) : '<span class="teamtrack-unlinked">—</span>';
+
+                        // 6. Current Project Column
+                        const projectVal = (member.currentProject || member.project || '').trim();
+                        const currentProjectHtml = projectVal ?
                             '<span class="teamtrack-project-badge">' + escapeHtml(projectVal) + '</span>' :
                             '<span class="teamtrack-unlinked">—</span>';
 
-                        let currentPageHtml = '<span class="teamtrack-unlinked">—</span>';
-                        const pageVal = member.currentPage !== undefined ? member.currentPage : member.page;
-                        if (pageVal && String(pageVal).trim() !== '') {
-                            const rawPage = String(pageVal).trim();
-                            if (/^https?:\/\//i.test(rawPage) || rawPage.startsWith('/') || rawPage.startsWith('./')) {
-                                const linkText = (member.currentPage && !/^https?:\/\//i.test(member.currentPage)) ? escapeHtml(member.currentPage) : 'View';
-                                currentPageHtml = '<a href="' + escapeHtml(rawPage) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-haproid-link">' +
-                                    '<span>' + linkText + '</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>' +
-                                    '</a>';
-                            } else {
-                                currentPageHtml = escapeHtml(rawPage);
-                            }
+                        // 7. Start Date Column
+                        const startDateVal = (member.startDate || '').trim();
+                        const startDateHtml = startDateVal ? escapeHtml(startDateVal) : '<span class="teamtrack-unlinked">—</span>';
+
+                        // 8. Status Column
+                        const statusVal = (member.status || '').trim();
+                        let statusBadge;
+                        if (statusVal) {
+                            const statusClass = statusVal.toLowerCase() === 'active' ? 'status-active' : 'status-inactive';
+                            statusBadge = '<span class="teamtrack-status-pill ' + statusClass + '">' +
+                                '<span class="teamtrack-status-dot"></span>' +
+                                escapeHtml(statusVal) +
+                                '</span>';
+                        } else {
+                            statusBadge = '<span class="teamtrack-unlinked">—</span>';
                         }
-
-                        const startDate = escapeHtml(member.startDate || '—');
-                        const endDate = escapeHtml(member.endDate || '—');
-
-                        const statusClass = (member.status || '').toLowerCase() === 'active' ? 'status-active' : 'status-inactive';
-                        const statusText = escapeHtml(member.status || 'Inactive');
-                        const statusBadge = '<span class="teamtrack-status-pill ' + statusClass + '">' +
-                            '<span class="teamtrack-status-dot"></span>' +
-                            statusText +
-                            '</span>';
-
-                        const haproIdLink = member.haproId ?
-                            '<a href="' + escapeHtml(member.haproId) + '" target="_blank" rel="noopener noreferrer" class="teamtrack-haproid-link">' +
-                            '<span>View</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>' +
-                            '</a>' :
-                            '<span class="teamtrack-unlinked">—</span>';
 
                         return '<tr>' +
                             '<td class="teamtrack-cell-num">' + num + '</td>' +
-                            '<td>' +
-                            '<div class="teamtrack-member-cell">' +
-                            avatarHtml +
-                            '<span class="teamtrack-member-name">' + name + '</span>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' + currentProject + '</td>' +
-                            '<td>' + currentPageHtml + '</td>' +
-                            '<td>' + startDate + '</td>' +
-                            '<td>' + endDate + '</td>' +
+                            '<td class="teamtrack-cell-photo">' + photoCellContent + '</td>' +
+                            '<td>' + nameCellContent + '</td>' +
+                            '<td>' + roleHtml + '</td>' +
+                            '<td>' + deptHtml + '</td>' +
+                            '<td>' + currentProjectHtml + '</td>' +
+                            '<td>' + startDateHtml + '</td>' +
                             '<td>' + statusBadge + '</td>' +
-                            '<td>' + haproIdLink + '</td>' +
                             '</tr>';
                     }).join('');
                 }
@@ -2007,9 +2085,11 @@
                                 status +
                                 '</span>';
 
-                            const avatarHtml = member.photo ?
-                                '<img src="' + escapeHtml(member.photo) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy">' :
-                                '<div class="teamtrack-avatar-fallback">' + getInitials(member.name) + '</div>';
+                            const cleanPhoto = (member.photo || '').trim();
+                            const initials = getInitials(member.name);
+                            const avatarHtml = cleanPhoto ?
+                                '<img src="' + escapeHtml(cleanPhoto) + '" alt="' + name + '" class="teamtrack-avatar" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';var f=document.createElement(\'div\');f.className=\'teamtrack-avatar-fallback\';f.textContent=\'' + escapeHtml(initials) + '\';this.parentNode.insertBefore(f,this);">' :
+                                '<div class="teamtrack-avatar-fallback">' + escapeHtml(initials) + '</div>';
 
                             return '<tr>' +
                                 '<td class="teamtrack-cell-num">' + slNo + '</td>' +
